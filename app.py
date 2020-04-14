@@ -1,6 +1,15 @@
 from flask import Flask, render_template
+from mongoengine import *
 
+connect('testDB')
 
+class User(Document):
+    email = StringField()
+    first_name = StringField()
+    last_name = StringField()
+
+adon = User(first_name='Adon', last_name='Moskal')
+adon.save()
 
 app = Flask(__name__)
 
