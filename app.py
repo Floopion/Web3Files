@@ -25,11 +25,10 @@ app = Flask(__name__, static_url_path='')
 
 
 @app.route('/')
-@app.route('/index'
-)
+@app.route('/index')
 @app.route('/home')
 def hello_world():
-    return render_template('index.html', title='Home' )
+    return render_template('index.html', title='Home')
 
 @app.route('/inspiration')
 def insp_page():
@@ -60,4 +59,4 @@ def getCountries(count_id=None):
     return countries.to_json()
 
 if __name__ == '__main__':
-    app.run(host='118.148.27.38', port=80)
+    app.run(threaded=True, port=5000)
