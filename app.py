@@ -1,10 +1,17 @@
 from flask import Flask, render_template
 from mongoengine import *
 
+app = Flask(__name__)
+
+# set the project root directory as the static folder, you can set others.
+app = Flask(__name__, static_url_path='')
+
+app.config["MONGO_URI"] = 'mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92'
+
 connect(
     'testDb',
-    username='heroku_c1wldm92',
-    password='eomrqnfplp7782hecehq4ahchh',
+    username='adminuser',
+    password='web3user',
     host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92',
     port=13626
 )
@@ -23,14 +30,6 @@ nz.save()
 
 adon = User(first_name='Adon', last_name='Moskal')
 adon.save()
-
-app = Flask(__name__)
-
-# set the project root directory as the static folder, you can set others.
-app = Flask(__name__, static_url_path='')
-
-# app.config["MONGODB_DB"] = 'app12345678'
-
 
 @app.route('/')
 @app.route('/index')
