@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from mongoengine import *
 
-connect('testDB')
+connect('testDB', host='mongodb://adminuser:web3user@ds113626.mlab.com:13626/heroku_c1wldm92')
 
 class User(Document):
     email = StringField()
