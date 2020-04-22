@@ -1,7 +1,13 @@
 from flask import Flask, render_template
 from mongoengine import *
 
-connect('heroku_c1wldm92', host='mongodb://adminuser:web3user@ds113626.mlab.com:13626/heroku_c1wldm92')
+connect(
+    'testDb',
+    username='heroku_c1wldm92',
+    password='eomrqnfplp7782hecehq4ahchh',
+    host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92',
+    port=13626
+)
 
 class User(Document):
     email = StringField()
@@ -23,6 +29,7 @@ app = Flask(__name__)
 # set the project root directory as the static folder, you can set others.
 app = Flask(__name__, static_url_path='')
 
+# app.config["MONGODB_DB"] = 'app12345678'
 
 
 @app.route('/')
