@@ -1,18 +1,11 @@
 from flask import Flask, render_template
 from mongoengine import *
 
-app = Flask(__name__)
-
-# set the project root directory as the static folder, you can set others.
-app = Flask(__name__, static_url_path='')
-
-app.config["MONGO_URI"] = 'mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92'
-
 connect(
     'testDb',
-    username='adminuser',
-    password='web3user',
-    host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92',
+    username='heroku_c1wldm92',
+    password='eomrqnfplp7782hecehq4ahchh',
+    host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
     port=13626
 )
 
@@ -30,6 +23,11 @@ nz.save()
 
 adon = User(first_name='Adon', last_name='Moskal')
 adon.save()
+
+app = Flask(__name__)
+
+# set the project root directory as the static folder, you can set others.
+app = Flask(__name__, static_url_path='')
 
 @app.route('/')
 @app.route('/index')
@@ -66,6 +64,7 @@ def getCountries(count_id=None):
     return countries.to_json()
 
 if __name__ == '__main__':
-    app.run(host='118.148.27.38', port=80)
+    app.run()
 
 
+#host='118.148.27.38', port=80
