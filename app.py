@@ -1,22 +1,22 @@
 from flask import Flask, render_template
 from mongoengine import *
 
-# connect('testDB')
-#
-# class User(Document):
-#     email = StringField()
-#     first_name = StringField()
-#     last_name = StringField()
-#
-# class Country(Document):
-#     name = StringField()
-#     population = IntField()
-#
-# nz = Country(name='New Zealand', population=2)
-# nz.save()
-#
-# adon = User(first_name='Adon', last_name='Moskal')
-# adon.save()
+connect('testDB')
+
+class User(Document):
+    email = StringField()
+    first_name = StringField()
+    last_name = StringField()
+
+class Country(Document):
+    name = StringField()
+    population = IntField()
+
+nz = Country(name='New Zealand', population=2)
+nz.save()
+
+adon = User(first_name='Adon', last_name='Moskal')
+adon.save()
 
 app = Flask(__name__)
 
@@ -39,25 +39,28 @@ def insp_page():
 def data_loader():
     return "Success"
 
-# @app.route('/users', methods=['GET'])
-# @app.route('/users/<user_id>', methods=['GET'])
-# def getUsers(user_id=None):
-#     users = None
-#     if user_id is None:
-#         users = User.objects
-#     else:
-#         users = User.objects.get(id=user_id)
-#     return users.to_json()
-#
-# @app.route('/countries', methods=['GET'])
-# @app.route('/countries/<count_id>', methods=['GET'])
-# def getCountries(count_id=None):
-#     countries = None
-#     if count_id is None:
-#         countries = Country.objects
-#     else:
-#         countries = Country.objects.get(id=count_id)
-#     return countries.to_json()
+@app.route('/users', methods=['GET'])
+@app.route('/users/<user_id>', methods=['GET'])
+def getUsers(user_id=None):
+    users = None
+    if user_id is None:
+        users = User.objects
+    else:
+        users = User.objects.get(id=user_id)
+    return users.to_json()
+
+@app.route('/countries', methods=['GET'])
+@app.route('/countries/<count_id>', methods=['GET'])
+def getCountries(count_id=None):
+    countries = None
+    if count_id is None:
+        countries = Country.objects
+    else:
+        countries = Country.objects.get(id=count_id)
+    return countries.to_json()
 
 if __name__ == '__main__':
-    app.run(host='118.148.27.38', port=80)
+    app.run()
+
+
+#host='118.148.27.38', port=80

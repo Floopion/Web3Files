@@ -1,40 +1,46 @@
 {% include "header.html" %}
-<body>
+<body style="overflow: hidden">
     <main>
         <div class="container" style="margin-top: 50px;">
-            <div class="row" style="height: 290px;">
-                <div class="col-3" style="margin: 0 10px;">
+            <h1 class="inspoHead">INSPIRATION WEBSITES</h1>
+            <div class="row" style="height: 50px;">
+                <div class="col-12" style="color: whitesmoke">
+                    <p>As you can tell straight off the bat, I am a massive fan of dark theme websites. Websites with neutral "noir" colour pallets and a minimal design I think to stand out a lot more in this day and age. I'm also a massive fan of minimal but meaningful animation to make interaction slightly more exciting! </p>
+                </div>
+            </div>
+            <div class="row" style="height: 350px;">
+                <div class="col-3" style="margin: 45px;">
                     <div class="nCard">
                         <div class="nContent">
-                            <div class="front">
-                                Front
+                            <div class="front" style="background-image: url({{ url_for('static', filename='ever.png') }});">
+                                Ever & Ever
                             </div>
                             <div class="back">
-                                Back!
+                                <a href="https://www.everandever.co/"><span>Check it Out!</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-3" style="margin: 0 10px;">
+                <div class="col-3" style="margin: 45px;">
                     <div class="nCard">
                         <div class="nContent">
-                            <div class="front">
-                                Front
+                            <div class="front" style="background-image: url({{ url_for('static', filename='brown.png') }});">
+                                Rich Brown
                             </div>
                             <div class="back">
-                                Back!
+                                <a href="https://www.richbrown.info/"><span>Check it Out!</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-3" style="margin: 0 10px;">
+                <div class="col-3" style="margin: 45px;">
                     <div class="nCard">
                         <div class="nContent">
-                            <div class="front">
-                                Front
+                            <div class="front" style="background-image: url({{ url_for('static', filename='bunny.png') }});">
+                               Garden Eight
                             </div>
                             <div class="back">
-                                Back!
+                                <a href="https://garden-eight.com/"><span>Check it Out!</span></a>
                             </div>
                         </div>
                     </div>
