@@ -88,6 +88,21 @@ def getCountries(count_id=None):
         countries = Country.objects.get(id=count_id)
     return countries.to_json()
 
+#####################################################
+#   Country POST api with empty placeholder method  #
+#####################################################
+@app.route('/countries', methods=['POST'])
+def postCountries(count_id=None):
+    countries = None
+
+#######################################################
+#   Country DELETE api with empty placeholder method  #
+#######################################################
+@app.route('/countries/<count_id>', methods=['DELETE'])
+def deleteCountry(count_id=None):
+    countries = None
+
+
 #################
 #   Run App.    #
 #################
