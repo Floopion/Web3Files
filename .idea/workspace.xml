@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8083c52-b12c-4f5d-988e-5c4dec56df7b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/cell_phones_total.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/internet_users.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/life_expectancy_years.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
@@ -28,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -113,7 +118,7 @@
       <workItem from="1587467558312" duration="1642000" />
       <workItem from="1587513881760" duration="5763000" />
       <workItem from="1587531431292" duration="7927000" />
-      <workItem from="1587599990819" duration="2326000" />
+      <workItem from="1587599990819" duration="4389000" />
     </task>
     <servers />
   </component>

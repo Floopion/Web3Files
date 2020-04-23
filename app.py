@@ -1,3 +1,5 @@
+import csv
+import os
 from flask import Flask, render_template
 from mongoengine import *
 
@@ -6,14 +8,14 @@ from mongoengine import *
 #  for local dev environment.                                   #
 #################################################################
 
-# connect(
-#     username='heroku_c1wldm92',
-#     password='eomrqnfplp7782hecehq4ahchh',
-#     host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
-#     port=13626
-# )
+connect(
+    username='heroku_c1wldm92',
+    password='eomrqnfplp7782hecehq4ahchh',
+    host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
+    port=13626
+)
 
-connect('devEnv')
+#connect('devEnv')
 
 #####################################
 #   Create Tables in the database   #
@@ -42,6 +44,7 @@ adon.save()
 # old = " app = Flask(__name__) "                                          #
 ############################################################################
 app = Flask(__name__, static_url_path='')
+app.config.from_object('config')
 
 #################
 #  App Routes   #
@@ -51,6 +54,14 @@ app = Flask(__name__, static_url_path='')
 @app.route('/index')
 @app.route('/home')
 def hello_world():
+    for file in os.listdir(app.config['FILES_FOLDER']):
+        filename = os.fsdecode(file)
+        path = os.path.join(app.config['FILES_FOLDER'], filename)
+        f = open(path)
+        r = csv.reader(f)
+        d = list(r)
+        for data in d:
+            print(data)
     return render_template('index.html', title='Home')
 
 @app.route('/inspiration')
