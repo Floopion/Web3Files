@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8083c52-b12c-4f5d-988e-5c4dec56df7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/cell_phones_total.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/internet_users.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/life_expectancy_years.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +116,10 @@
       <workItem from="1587467558312" duration="1642000" />
       <workItem from="1587513881760" duration="5763000" />
       <workItem from="1587531431292" duration="7927000" />
-      <workItem from="1587599990819" duration="4389000" />
+      <workItem from="1587599990819" duration="7922000" />
+      <workItem from="1587636838359" duration="1491000" />
+      <workItem from="1587689268141" duration="1097000" />
+      <workItem from="1587690420750" duration="3867000" />
     </task>
     <servers />
   </component>
@@ -134,21 +135,25 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="724" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1587461336120" />
-    <state width="914" height="286" key="GridCell.Tab.0.bottom" timestamp="1587466520850">
+    <state width="1877" height="286" key="GridCell.Tab.0.bottom" timestamp="1587690380084">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state width="1877" height="286" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.-195.1680.1020/-1680.-195.1680.1020@0.0.1920.1050" timestamp="1587690380084" />
     <state width="914" height="286" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1587466520850" />
-    <state width="914" height="286" key="GridCell.Tab.0.center" timestamp="1587466520850">
+    <state width="1877" height="286" key="GridCell.Tab.0.center" timestamp="1587690380084">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state width="1877" height="286" key="GridCell.Tab.0.center/0.0.1920.1050/1920.-195.1680.1020/-1680.-195.1680.1020@0.0.1920.1050" timestamp="1587690380084" />
     <state width="914" height="286" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1587466520850" />
-    <state width="914" height="286" key="GridCell.Tab.0.left" timestamp="1587466520850">
+    <state width="1877" height="286" key="GridCell.Tab.0.left" timestamp="1587690380084">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state width="1877" height="286" key="GridCell.Tab.0.left/0.0.1920.1050/1920.-195.1680.1020/-1680.-195.1680.1020@0.0.1920.1050" timestamp="1587690380084" />
     <state width="914" height="286" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1587466520850" />
-    <state width="914" height="286" key="GridCell.Tab.0.right" timestamp="1587466520850">
+    <state width="1877" height="286" key="GridCell.Tab.0.right" timestamp="1587690380084">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state width="1877" height="286" key="GridCell.Tab.0.right/0.0.1920.1050/1920.-195.1680.1020/-1680.-195.1680.1020@0.0.1920.1050" timestamp="1587690380084" />
     <state width="914" height="286" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1587466520850" />
     <state x="922" y="171" key="SettingsEditor" timestamp="1583443626386">
       <screen x="0" y="0" width="1920" height="1050" />
@@ -162,6 +167,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Flask$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1584475865167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Flask$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1584475915919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/Web3Files$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1587466479139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Web3Files$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1587690254381" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

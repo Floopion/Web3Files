@@ -36,7 +36,7 @@ class Country(Document):
 nz = Country(name='New Zealand', population=2)
 nz.save()
 
-adon = User(first_name='Adon', last_name='Moskal')
+adon = User(first_name='King', last_name='Dion')
 adon.save()
 
 ############################################################################
@@ -97,7 +97,7 @@ def getCountries(count_id=None):
         countries = Country.objects
     else:
         countries = Country.objects.get(id=count_id)
-    return countries.to_json()
+    return countries.to_json(), 200
 
 #####################################################
 #   Country POST api with empty placeholder method  #
