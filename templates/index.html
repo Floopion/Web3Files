@@ -20,15 +20,15 @@
                       <div class="modal-body">
                           <div class="form-group">
                             <label for="cName">Country Name</label>
-                            <input type="text" class="form-control" id="cName" placeholder="Country Name">
+                            <input type="text" class="form-control" id="cName" placeholder="Country Name" required>
                           </div>
                           <div class="form-group">
                             <label for="cPop">Population</label>
-                            <input type="number" class="form-control" id="cPop" placeholder="Population">
+                            <input type="number" class="form-control" id="cPop" placeholder="Population" required>
                           </div>
                       </div>
                         <div class="modal-footer">
-                            <button type="button" name="submit" type="submit" value="submit" class="btn btn-default" data-dismiss="modal" onclick="getFormData()">Submit</button>
+                            <button type="submit" name="submit" type="submit" value="submit" class="btn btn-default" data-dismiss="modal" onclick="getFormData()">Submit</button>
                         </div>
                     </form>
                   </div>
@@ -48,22 +48,27 @@ function changeText(type) {
     $.get(("/" + type), function (response) {
         console.log(response);
         $('#placeholder').text(response);
-    }).fail({
-        $('#placeholder').text("Oops! Something went wrong, Please try again!");
+    {#}).fail({#}
+    {#    $('#placeholder').text(Oops! Something went wrong, Please try again!);#}
     });
 
 };
 
 function getFormData() {
 
-    let cName = $('#cName').val();
-    let cPop = $('#cPop').val();
+    let country = {};
+    country["cName"] = $('#cName').val();
+    country["cPop"] = $('#cPop').val();
+    console.log(country);
 
-    $(':input','#cForm')
+    $.post(("/countries"), country, function (data) {
+        alert(data);
+    });
+
+    $(':input', '#cForm')
     .not(':button, :submit, :reset, :hidden')
     .val('')
     .prop('checked', false)
     .prop('selected', false);
-    alert('Success!');
-}
+};
 </script>

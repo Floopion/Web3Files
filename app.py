@@ -1,6 +1,6 @@
 import csv
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from mongoengine import *
 
 #################################################################
@@ -103,8 +103,15 @@ def getCountries(count_id=None):
 #   Country POST api with empty placeholder method  #
 #####################################################
 @app.route('/countries', methods=['POST'])
-def postCountries(count_id=None):
-    countries = None
+def postCountries():
+
+    nName = request.form['cName']
+    nPopulation = request.form['cPop']
+
+    newCountry = Country(name=nName, population=nPopulation)
+    newCountry.save()
+
+    return "Success!"
 
 #######################################################
 #   Country DELETE api with empty placeholder method  #
