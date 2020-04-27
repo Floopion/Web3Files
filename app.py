@@ -15,7 +15,8 @@ connect(
     port=13626
 )
 
-#connect('devEnv')
+
+# connect('devEnv')
 
 #####################################
 #   Create Tables in the database   #
@@ -24,6 +25,7 @@ class User(Document):
     email = StringField()
     first_name = StringField()
     last_name = StringField()
+
 
 class Country(Document):
     name = StringField()
@@ -46,6 +48,7 @@ adon.save()
 app = Flask(__name__, static_url_path='')
 app.config.from_object('config')
 
+
 #################
 #  App Routes   #
 #################
@@ -64,13 +67,16 @@ def hello_world():
             print(data)
     return render_template('index.html', title='Home')
 
+
 @app.route('/inspiration')
 def insp_page():
     return render_template('inspiration.html', title='Inspiration')
 
+
 @app.route('/loadData')
 def data_loader():
     return "Success"
+
 
 #############################################################
 # User GET API`S Mainly used for testing. May remove later  #
@@ -93,32 +99,44 @@ def getUsers(user_id=None):
 @app.route('/countries/<count_id>', methods=['GET'])
 def getCountries(count_id=None):
     countries = None
-    if count_id is None:
-        countries = Country.objects
-    else:
-        countries = Country.objects.get(id=count_id)
-    return countries.to_json(), 200
+    try:
+        if count_id is None:
+            countries = Country.objects
+        else:
+            countries = Country.objects.get(id=count_id)
+        return countries.to_json(), 200
+    except:
+        return "Something went Wrong, Please try again", 500
+
 
 #####################################################
 #   Country POST api with empty placeholder method  #
 #####################################################
 @app.route('/countries', methods=['POST'])
 def postCountries():
+    try:
+        nName = request.form['cName']
+        nPopulation = request.form['cPop']
+        newCountry = Country(name=nName, population=nPopulation)
+        newCountry.save()
+        return "Success!", 200
+    except:
+        return "Something went Wrong, Please try again", 500
 
-    nName = request.form['cName']
-    nPopulation = request.form['cPop']
-
-    newCountry = Country(name=nName, population=nPopulation)
-    newCountry.save()
-
-    return "Success!"
 
 #######################################################
 #   Country DELETE api with empty placeholder method  #
 #######################################################
-@app.route('/countries/<count_id>', methods=['DELETE'])
-def deleteCountry(count_id=None):
-    countries = None
+@app.route('/delcountry', methods=['DELETE'])
+def deleteCountry():
+
+    try:
+        country = request.form['name']
+        print(country)
+        Country.objects(name=country).delete()
+        return "Success!", 200
+    except:
+        return "Something went Wrong, Please try again", 500
 
 
 #################
