@@ -67,11 +67,9 @@ function deleteCountry() {
     let country = {};
     country['name'] = toDelete;
 
-    console.log(country);
-
      $.ajax({
           type: 'DELETE',
-          url: "/delcountry'",
+          url: "/countries",
           data: country,
         });
 }

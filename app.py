@@ -16,7 +16,7 @@ connect(
 )
 
 
-# connect('devEnv')
+#connect('devEnv')
 
 #####################################
 #   Create Tables in the database   #
@@ -127,7 +127,7 @@ def postCountries():
 #######################################################
 #   Country DELETE api with empty placeholder method  #
 #######################################################
-@app.route('/delcountry', methods=['DELETE'])
+@app.route('/countries', methods=['DELETE'])
 def deleteCountry():
 
     try:
