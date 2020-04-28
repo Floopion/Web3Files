@@ -14,6 +14,13 @@ function changeText(type) {
     });
 };
 
+function findCountry() {
+
+    $.get(("/countries/" + $('#cFind').val()), function (response) {
+        console.log(response);
+        $('#placeholder').text(response);
+    });
+};
 
 /*##############################
 #       POST Requests          #
