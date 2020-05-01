@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8083c52-b12c-4f5d-988e-5c4dec56df7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/d3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +132,7 @@
       <workItem from="1588051464770" duration="3652000" />
       <workItem from="1588124787408" duration="4380000" />
       <workItem from="1588223303685" duration="1227000" />
-      <workItem from="1588336240939" duration="3430000" />
+      <workItem from="1588336240939" duration="3714000" />
     </task>
     <servers />
   </component>
