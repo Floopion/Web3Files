@@ -1,3 +1,5 @@
+
+
 /*#####################################################
 #   Ajax Requests for Getting Countries and Users,    #
 #   Adding Countries and Deleting Countries           #
@@ -79,4 +81,14 @@ function deleteCountry() {
           url: "/countries",
           data: country,
         });
-}
+};
+
+/*##################
+#       D3         #
+###################*/
+
+function d3Svg(){
+    const svg = d3.select('svg');
+    svg.style('background-color','orange');
+    console.log("yolo")
+};
