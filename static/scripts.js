@@ -158,7 +158,7 @@ function countryCircles(){
         // add a circle to each 'g'
         var circle = en.append("circle")
             .attr("r",function(d){ return Math.random() * 20 })
-            .attr("fill",function(d,i){ return i % 2 == 0 ? "red" : "blue" });
+            .attr("fill",function(d,i){ return i % 2 == 0 ? "pink" : "green" });
 
         // add a text to each 'g'
         en.append("text").text(function(d){ return d.name });

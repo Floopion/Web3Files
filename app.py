@@ -1,6 +1,6 @@
 import csv
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,jsonify
 from mongoengine import *
 
 #################################################################
@@ -8,15 +8,15 @@ from mongoengine import *
 #  for local dev environment.                                   #
 #################################################################
 
-connect(
-     username='heroku_c1wldm92',
-     password='eomrqnfplp7782hecehq4ahchh',
-     host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
-     port=13626
-)
+# connect(
+#      username='heroku_c1wldm92',
+#      password='eomrqnfplp7782hecehq4ahchh',
+#      host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
+#      port=13626
+# )
 
 
-#connect('devEnv')
+connect('devEnv')
 
 #####################################
 #   Create Tables in the database   #
@@ -29,17 +29,15 @@ class User(Document):
 
 class Country(Document):
     name = StringField()
-    population = IntField()
+    data = DictField()
 
 
 #########################
 #   Add Data to Mongo   #
 #########################
-nz = Country(name='New Zealand', population=2)
-nz.save()
+# nz = Country(name='New Zealand', data={})
+# nz.save()
 
-adon = User(first_name='King', last_name='Dion')
-adon.save()
 
 ############################################################################
 # set the project root directory as the static folder, you can set others. #
@@ -57,14 +55,6 @@ app.config.from_object('config')
 @app.route('/index')
 @app.route('/home')
 def hello_world():
-    for file in os.listdir(app.config['FILES_FOLDER']):
-        filename = os.fsdecode(file)
-        path = os.path.join(app.config['FILES_FOLDER'], filename)
-        f = open(path)
-        r = csv.reader(f)
-        d = list(r)
-        for data in d:
-            print(data)
     return render_template('index.html', title='Home')
 
 
@@ -75,8 +65,33 @@ def insp_page():
 
 @app.route('/loadData')
 def data_loader():
-    return "Success"
+    for file in os.listdir(app.config['FILES_FOLDER']):
+        filename = os.fsdecode(file)
+        path = os.path.join(app.config['FILES_FOLDER'], filename)
+        f = open(path)
+        r = csv.DictReader(f)
+        d = list(r)
+        for data in d:
+            country = Country()
+            dict = {}
+            for key in data:
+                if key == "country":
+                    if Country.objects(name=data[key]).count() > 0:
+                        country = Country.objects.get(name=data[key])
+                        dict = country.data
+                    else:
+                        country.name = data[key]
+                else:
+                    f = filename.replace(".csv" , "")  # we want to trim off the ".csv" as we can't save anything with a "." as a mongodb field name
+                    if f in dict:  # check if this filename is already a field in the dict
+                        dict[f][key] = data[key]  # if it is, just add a new subfield which is key : data[key] (value)
+                    else:
+                        dict[f] = {key: data[key]}  # if it is not, create a new object and assign it to the dict
 
+                country.data = dict
+
+            country.save()
+    return "success"
 
 #############################################################
 # User GET API`S Mainly used for testing. May remove later  #
@@ -143,4 +158,4 @@ def deleteCountry():
 #   Run App.    #
 #################
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, use_reloader=False)
