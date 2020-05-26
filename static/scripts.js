@@ -87,7 +87,7 @@ function deleteCountry() {
 #       D3         #
 ###################*/
 
-function d3Svg(){
+/*function d3Svg(){
 
     d3.selectAll("svg > *").remove();
 
@@ -131,9 +131,11 @@ function d3Svg(){
         endAngle: Math.PI * 3 / 2
     }))
     .attr('fill', 'orange');
-};
+};*/
 
 function countryCircles(){
+
+     $('#placeholder').empty();
 
      d3.selectAll("svg > *").remove();
 
@@ -152,16 +154,16 @@ function countryCircles(){
         // create new 'g' elements for each country
         var en = g.enter().append("g")
             .attr("transform",function(d){
-            return "translate("+ (Math.random() * 900) + 40 + "," + (Math.random() * 450) + 40 +")"
+            return "translate("+ (Math.random() * 1095) + 40 + "," + (Math.random() * 650) + 40 +")"
         });
 
         // add a circle to each 'g'
         var circle = en.append("circle")
             .attr("r",function(d){ return Math.random() * 20 })
-            .attr("fill",function(d,i){ return i % 2 == 0 ? "pink" : "green" });
+            .attr("fill",function(d,i){ return i % 2 == 0 ? "blue" : "orange" });
 
         // add a text to each 'g'
-        en.append("text").text(function(d){ return d.name });
+        en.append("text").text(function(d){ return d.name });;
 
      });
 };
