@@ -2,6 +2,7 @@ import csv
 import os
 from flask import Flask, render_template, request,jsonify
 from mongoengine import *
+from flask_cors import CORS
 
 #################################################################
 #  Connect to Mongo. URI is for Prod. Single line connect is    #
@@ -44,6 +45,7 @@ class Country(Document):
 # old = " app = Flask(__name__) "                                          #
 ############################################################################
 app = Flask(__name__, static_url_path='')
+CORS(app)
 app.config.from_object('config')
 
 
