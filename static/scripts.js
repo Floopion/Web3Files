@@ -169,31 +169,3 @@ function countryCircles(){
 };
 
 
-// function circles(){
-//
-//     d3.selectAll("svg > *").remove();
-//
-//     const svg = d3.select('svg');
-//     svg.style('background-color','grey');
-//
-//
-//     var data = [
-//         { "name" : "Canada" },
-//         { "name" : "New Zealand" }
-//     ];
-//
-//     var g = d3.select("svg").selectAll("g").data(data);
-//
-//     var enter = g.enter().append("g")
-//     .attr("transform",function(d){
-//     return "translate("+ (Math.random() * 100) + 40 + "," + (Math.random() * 100) + 40 +")"
-//     });
-//
-//     var circle = enter.append("circle")
-//     .attr("r",function(d){ return Math.random() * 20 })
-//     .attr("fill",function(d,i){ return i % 2 == 0 ? "red" : "blue" });
-//
-//     enter.append("text").text(function(d){ return d.name });
-// }
-
-
