@@ -61,3 +61,11 @@ body{
     font-weight: bolder;
     color: chocolate;
 }
+
+.mainContent{
+    margin-top: 50px;
+    background-color: darkgrey;
+    height: 80vh;
+    padding: 20px;
+    overflow: hidden;
+}
