@@ -18,9 +18,12 @@ function getAllCountries() {
 
 function findCountry() {
 
-    $.get(("/countries/" + $('#cFind').val()), function (response) {
-        console.log(response);
+    $.get("/countries/" + $('#cFind').val())
+    .done(function(response){
         $('#placeholder').text(response);
+    })
+    .fail(function(xhr, status, error) {
+        $('#placeholder').text(error + " Please Try Again!");
     });
 };
 
@@ -83,56 +86,10 @@ function deleteCountry() {
         });
 };
 
-/*##################
-#       D3         #
-###################*/
 
-/*function d3Svg(){
-
-    d3.selectAll("svg > *").remove();
-
-    const svg = d3.select('svg');
-    svg.style('background-color','purple');
-
-    const width = +(svg.attr('width'));
-    const height = +(svg.attr('height'));
-
-    const circle = svg.append('circle')
-        .attr('r',230)
-        .attr('cy', height / 2)
-        .attr('cx', width / 2);
-
-    const leftEye = svg.append('circle')
-        .attr('r',30)
-        .attr('cy', height / 2 - 100)
-        .attr('cx', width / 2 - 60 )
-        .attr('fill', 'orange');
-
-    const rightEye = svg.append('circle')
-        .attr('r',30)
-        .attr('cy', height / 2 - 100)
-        .attr('cx', width / 2 + 60)
-        .attr('fill', 'orange');
-
-        const nose = svg.append('circle')
-        .attr('r',20)
-        .attr('cy', height / 2)
-        .attr('cx', width / 2)
-        .attr('fill', 'orange');
-
-    const  g = svg.append('g')
-        .attr('transform', 'translate(480, 250)');
-
-    const Mouth = g.append('path')
-    .attr('d', d3.arc()({
-        innerRadius:140,
-        outerRadius: 170,
-        startAngle: Math.PI /2,
-        endAngle: Math.PI * 3 / 2
-    }))
-    .attr('fill', 'orange');
-};*/
-
+/*################
+#       D3       #
+##################*/
 function countryCircles(){
 
      $('#placeholder').empty();

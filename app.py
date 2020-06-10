@@ -17,7 +17,7 @@ connect(
 )
 
 
-# connect('devEnv')
+#connect('devEnv')
 
 #####################################
 #   Create Tables in the database   #
@@ -95,6 +95,11 @@ def data_loader():
             country.save()
     return "success"
 
+@app.route('/deleteTable')
+def drop_DB():
+    Country.drop_collection()
+    return "Countries table has Been Deleted"
+
 #############################################################
 # User GET API`S Mainly used for testing. May remove later  #
 #############################################################
@@ -123,12 +128,12 @@ def getCountries(count_id=None):
             countries = Country.objects.get(id=count_id)
         return countries.to_json(), 200
     except:
-        return "Something went Wrong, Please try again", 500
+        return "Something went Wrong, Please try again",
 
 
-#####################################################
-#   Country POST api with empty placeholder method  #
-#####################################################
+######################
+#   Country POST API #
+######################
 @app.route('/countries', methods=['POST'])
 def postCountries():
     try:
@@ -141,9 +146,9 @@ def postCountries():
         return "Something went Wrong, Please try again", 500
 
 
-#######################################################
-#   Country DELETE api with empty placeholder method  #
-#######################################################
+#########################
+#   Country DELETE API  #
+#########################
 @app.route('/countries', methods=['DELETE'])
 def deleteCountry():
 
