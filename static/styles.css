@@ -41,6 +41,6 @@ footer { text-align: center; margin-bottom: 20px; }
 
 .btn { margin: 0 20px; }
 
-.buttonGroup { display: block; margin: 0 auto; }
+.buttonGroup { display: block; margin: 0 auto; text-align: center; }
 
 /*# sourceMappingURL=styles.css.map */

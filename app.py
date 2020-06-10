@@ -27,11 +27,9 @@ class User(Document):
     first_name = StringField()
     last_name = StringField()
 
-
 class Country(Document):
     name = StringField()
     data = DictField()
-
 
 #########################
 #   Add Data to Mongo   #
