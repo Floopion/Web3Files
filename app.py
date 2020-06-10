@@ -128,7 +128,10 @@ def getCountries(count_id=None):
             countries = Country.objects.get(id=count_id)
         return countries.to_json(), 200
     except:
-        return "Something went Wrong, Please try again",
+        if (countries.count < 1):
+            return "NOT FOUND", 404
+        else:
+            return "INTERNAL SERVER ERROR", 500
 
 
 ######################
@@ -158,7 +161,7 @@ def deleteCountry():
         Country.objects(name=country).delete()
         return "Success!", 200
     except:
-        return "Something went Wrong, Please try again", 500
+        return "Something went Wrong, Please try again", 404
 
 
 #################

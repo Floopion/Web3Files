@@ -4,9 +4,7 @@
     <list default="true" id="a8083c52-b12c-4f5d-988e-5c4dec56df7b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,9 +50,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="CSS" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -155,6 +154,7 @@
       <workItem from="1591424541905" duration="885000" />
       <workItem from="1591681635773" duration="7465000" />
       <workItem from="1591750264389" duration="351000" />
+      <workItem from="1591764610491" duration="3825000" />
     </task>
     <task id="LOCAL-00001" summary="Added CORs Package, Updated Requirements file for Heroku.">
       <created>1591140135233</created>
@@ -235,9 +235,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1877" height="352" key="GridCell.Tab.1.right/0.0.1920.1050/1920.-195.1680.1020/-1680.-195.1680.1020@0.0.1920.1050" timestamp="1588834752123" />
-    <state x="922" y="171" key="SettingsEditor" timestamp="1583443626386">
+    <state x="922" y="171" key="SettingsEditor" timestamp="1591767045831">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="922" y="171" key="SettingsEditor/0.0.1920.1050/1920.-168.1680.1020/-1680.-167.1680.1020@0.0.1920.1050" timestamp="1591767045831" />
     <state x="922" y="171" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1583443626386" />
     <state x="655" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1583868060335">
       <screen x="0" y="0" width="1920" height="1050" />
