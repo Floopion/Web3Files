@@ -115,7 +115,7 @@ function countryCircles(){
         // create new 'g' elements for each country
         var en = g.enter().append("g")
             .attr("transform",function(d){
-            return "translate("+ (Math.random() * 1095) + 40 + "," + (Math.random() * 650) + 40 +")"
+            return "translate("+ (Math.random() * 1350) + 40 + "," + (Math.random() * 650) + 40 +")"
         });
 
         // add a circle to each 'g'

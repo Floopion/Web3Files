@@ -151,6 +151,39 @@ footer{
         border-color: $quaternaryColor;
         color: black ;
     }
+
+}.btn-success{
+    border-color: $primaryColor;
+    color: black;
+    background-color: $primaryColor !important;
+    &:hover{
+        border-color: $primaryColor;
+    }
+}
+
+.btn-info{
+    border-color: $secondaryColor;
+    color: black;
+    background-color: $secondaryColor !important;
+    &:hover{
+        border-color: $secondaryColor;
+    }
+}
+
+.btn-danger{
+    border-color: $tertiaryColor;
+    color: black;
+    background-color: $tertiaryColor !important;
+    &:hover{
+        border-color: $tertiaryColor;
+    }
+}
+
+.btn-primary{
+    border-color: $quaternaryColor;
+    color: black;
+    background-color: $quaternaryColor !important;
+
 }
 
 .btn{
@@ -163,3 +196,21 @@ footer{
     text-align: center;
 }
 
+.modal-content{
+    background-color: #343a40;
+    color: whitesmoke;
+}
+
+.colorImg {
+    max-width: 80%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.close{
+    color: whitesmoke;
+    &:hover{
+        color: mediumvioletred;
+    }
+}
