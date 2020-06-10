@@ -21,7 +21,7 @@ footer { text-align: center; margin-bottom: 20px; }
 
 .back a { color: white; }
 
-.inspoHead { text-align: center; margin: 0 auto 10px auto; font-weight: bolder; color: chocolate; }
+.inspoHead { text-align: center; margin: 0 auto 10px auto; font-weight: bolder; color: #FFAC81; }
 
 /* Main Graph Container */
 .mainContent { margin-top: 50px; height: 80vh; padding: 20px; overflow: hidden; }
