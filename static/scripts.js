@@ -22,8 +22,12 @@ function findCountry() {
     .done(function(response){
         $('#placeholder').text(response);
     })
-    .fail(function(xhr, status, error) {
-        $('#placeholder').text(error + " Please Try Again!");
+    .fail(function(xhr, status, error){
+        if (error == "NOT FOUND") {
+            $('#placeholder').text(error + " Please enter a valid country ID!");
+        }else {
+            $('#placeholder').text(error + " Please try again later.");
+        }
     });
 };
 
@@ -117,7 +121,7 @@ function countryCircles(){
         // add a circle to each 'g'
         var circle = en.append("circle")
             .attr("r",function(d){ return Math.random() * 20 })
-            .attr("fill",function(d,i){ return i % 2 == 0 ? "blue" : "orange" });
+            .attr("fill",function(d,i){ return i % 2 == 0 ? "#FF928B" : "#FFAC81" });
 
         // add a text to each 'g'
         en.append("text").text(function(d){ return d.name });;

@@ -1,10 +1,19 @@
 @import "https://fonts.googleapis.com/css?family=Lily+Script+One";
+/* Color variables */
 body { background-color: #333; }
 
+footer { text-align: center; margin-bottom: 20px; }
+
+#placeholder { color: #FF928B; text-align: center; margin-top: 20px; }
+
+/* Stretch out the main bootstap container max width to allow the graph width to be wider that unsual */
+@media (min-width: 992px) { .container { max-width: 1350px; } }
+/* Styling for inspiration page and card animations */
 .nCard { position: absolute; top: 50%; left: 50%; width: 300px; height: 600px; margin: -150px; float: left; perspective: 500px; }
-.nCard :hover .nContent { transform: rotateY(180deg); transition: transform 0.5s; }
 
 .nContent { position: absolute; width: 100%; height: 100%; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); transition: transform 1s; transform-style: preserve-3d; }
+
+.nCard:hover .nContent { transform: rotateY(180deg); transition: transform 0.5s; }
 
 .front, .back { position: absolute; height: 100%; width: 100%; background: white; line-height: 550px; color: white; text-align: center; font-size: 35px; font-weight: 600; border-radius: 5px; backface-visibility: hidden; }
 
@@ -14,9 +23,24 @@ body { background-color: #333; }
 
 .inspoHead { text-align: center; margin: 0 auto 10px auto; font-weight: bolder; color: chocolate; }
 
+/* Main Graph Container */
 .mainContent { margin-top: 50px; height: 80vh; padding: 20px; overflow: hidden; }
 
-.btn-outline-success { border-color: #64A6BD; color: #90A8C3; }
-.btn-outline-success:hover { text-decoration: none; background-color: #64A6BD !important; border-color: #64A6BD; }
+/* Boostrap button styling and re-colour */
+.btn-outline-success { border-color: #CDEAC0; color: #CDEAC0; }
+.btn-outline-success:hover { text-decoration: none; background-color: #CDEAC0 !important; border-color: #CDEAC0; color: black; }
+
+.btn-outline-info { border-color: #EFE9AE; color: #EFE9AE; }
+.btn-outline-info:hover { text-decoration: none; background-color: #EFE9AE !important; border-color: #EFE9AE; color: black; }
+
+.btn-outline-danger { border-color: #FEC3A6; color: #FEC3A6; }
+.btn-outline-danger:hover { text-decoration: none; background-color: #FEC3A6 !important; border-color: #FEC3A6; color: black; }
+
+.btn-outline-primary { border-color: #FF928B; color: #FF928B; }
+.btn-outline-primary:hover { text-decoration: none; background-color: #FF928B !important; border-color: #FF928B; color: black; }
+
+.btn { margin: 0 20px; }
+
+.buttonGroup { display: block; margin: 0 auto; }
 
 /*# sourceMappingURL=styles.css.map */

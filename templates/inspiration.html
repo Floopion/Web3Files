@@ -1,7 +1,7 @@
 {% include "header.html" %}
-<body style="overflow: hidden">
+<body>
     <main>
-        <div class="container" style="margin-top: 50px;">
+        <div class="container" style="margin-top: 50px; display: block; min-height: 82vh">
             <h1 class="inspoHead">INSPIRATION WEBSITES</h1>
             <div class="row" style="height: 50px;">
                 <div class="col-12" style="color: whitesmoke">
@@ -47,9 +47,17 @@
                 </div>
             </div>
         </div>
+        <div class="container" style="display: block; margin-bottom:20px">
+            <div class="row">
+                <div class="col-12" style="color: whitesmoke">
+                    <p>To accent the dark them nature of this website I`ve used a <a href="https://coolors.co/"> color generator</a> to help me generate a colour scheme with some more "pastel tones", this helps to replace the somewhat abrasive and bright boilerplate bootstrap colours.</p>
+                    <img src="{{ url_for('static', filename='colors.png') }}" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
     </main>
-<footer>
-
+<footer class="footer">
+    &copy Dion Bedford
 </footer>
 </body>
 </html>

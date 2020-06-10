@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8083c52-b12c-4f5d-988e-5c4dec56df7b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/static/colors.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/inspiration.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/inspiration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,13 +61,13 @@
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Floopion\Desktop\Web 3\Web3Files\static" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Floopion\Desktop\Web 3\Web3Files\static" />
       <recent name="C:\Users\Floopion\PycharmProjects\Flask\static" />
       <recent name="C:\Users\Floopion\PycharmProjects\Flask\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Floopion\Desktop\Web 3\Web3Files\static" />
     </key>
   </component>
   <component name="RunManager" selected="Flask server.Flask (app.py)">
@@ -154,7 +159,7 @@
       <workItem from="1591424541905" duration="885000" />
       <workItem from="1591681635773" duration="7465000" />
       <workItem from="1591750264389" duration="351000" />
-      <workItem from="1591764610491" duration="3825000" />
+      <workItem from="1591764610491" duration="7840000" />
     </task>
     <task id="LOCAL-00001" summary="Added CORs Package, Updated Requirements file for Heroku.">
       <created>1591140135233</created>
@@ -256,9 +261,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="657" y="123" width="606" height="804" key="find.popup/0.0.1920.1050/1920.-168.1680.1020/-1680.-167.1680.1020@0.0.1920.1050" timestamp="1590483761860" />
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1588471932111">
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1591769275790">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/1920.-168.1680.1020/-1680.-167.1680.1020@0.0.1920.1050" timestamp="1591769275790" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1588471932111" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

@@ -9,15 +9,15 @@ from flask_cors import CORS
 #  for local dev environment.                                   #
 #################################################################
 
-connect(
-     username='heroku_c1wldm92',
-     password='eomrqnfplp7782hecehq4ahchh',
-     host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
-     port=13626
-)
+# connect(
+#      username='heroku_c1wldm92',
+#      password='eomrqnfplp7782hecehq4ahchh',
+#      host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
+#      port=13626
+# )
 
 
-#connect('devEnv')
+connect('devEnv')
 
 #####################################
 #   Create Tables in the database   #
@@ -120,7 +120,7 @@ def getUsers(user_id=None):
 @app.route('/countries', methods=['GET'])
 @app.route('/countries/<count_id>', methods=['GET'])
 def getCountries(count_id=None):
-    countries = None
+    countries = {}
     try:
         if count_id is None:
             countries = Country.objects
@@ -128,7 +128,7 @@ def getCountries(count_id=None):
             countries = Country.objects.get(id=count_id)
         return countries.to_json(), 200
     except:
-        if (countries.count < 1):
+        if not countries:
             return "NOT FOUND", 404
         else:
             return "INTERNAL SERVER ERROR", 500

@@ -1,15 +1,41 @@
 @import 'https://fonts.googleapis.com/css?family=Lily+Script+One';
 
-$firstColor: #64A6BD;
-$secondColor: #90A8C3;
-$tertiaryColor: #ADA7C9;
-$quaternaryColor:#D7B9D5;
-$quinaryColor: #F4CAE0;
+
+/*
+    Color variables
+ */
+$primaryColor: #CDEAC0;
+$secondaryColor: #EFE9AE;
+$tertiaryColor: #FEC3A6;
+$quaternaryColor:#FF928B;
+$quinaryColor: #FFAC81;
 
 body{
     background-color: #333;
 }
+footer{
+    text-align: center;
+    margin-bottom: 20px;
+}
 
+#placeholder{
+    color: $quaternaryColor;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/*
+    Stretch out the main bootstap container max width to allow the graph width to be wider that unsual
+ */
+@media (min-width: 992px) {
+    .container {
+        max-width: 1350px;
+    }
+}
+
+/*
+    Styling for inspiration page and card animations
+ */
 .nCard {
     position: absolute;
     top: 50%;
@@ -19,12 +45,6 @@ body{
     margin: -150px;
     float: left;
     perspective: 500px;
-    :hover {
-        .nContent {
-            transform: rotateY( 180deg );
-            transition: transform 0.5s;
-        }
-    }
 }
 
 .nContent {
@@ -32,11 +52,14 @@ body{
     width: 100%;
     height: 100%;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
-
     transition: transform 1s;
     transform-style: preserve-3d;
 }
 
+.nCard:hover .nContent {
+    transform: rotateY( 180deg ) ;
+    transition: transform 0.5s;
+}
 
 .front,
 .back {
@@ -72,6 +95,10 @@ body{
     color: chocolate;
 }
 
+
+/*
+    Main Graph Container
+ */
 .mainContent{
     margin-top: 50px;
     height: 80vh;
@@ -79,12 +106,59 @@ body{
     overflow: hidden;
 }
 
+/*
+    Boostrap button styling and re-colour
+ */
 .btn-outline-success{
-    border-color: $firstColor;
-    color: $secondColor ;
+    border-color: $primaryColor;
+    color: $primaryColor ;
     &:hover{
         text-decoration: none;
-        background-color: $firstColor !important;
-        border-color: $firstColor;
+        background-color: $primaryColor !important;
+        border-color: $primaryColor;
+        color: black ;
     }
 }
+
+.btn-outline-info{
+    border-color: $secondaryColor;
+    color: $secondaryColor ;
+    &:hover{
+        text-decoration: none;
+        background-color: $secondaryColor !important;
+        border-color: $secondaryColor;
+        color: black ;
+    }
+}
+
+.btn-outline-danger{
+    border-color: $tertiaryColor;
+    color: $tertiaryColor ;
+    &:hover{
+        text-decoration: none;
+        background-color: $tertiaryColor !important;
+        border-color: $tertiaryColor;
+        color: black ;
+    }
+}
+
+.btn-outline-primary{
+    border-color: $quaternaryColor;
+    color: $quaternaryColor ;
+    &:hover{
+        text-decoration: none;
+        background-color: $quaternaryColor !important;
+        border-color: $quaternaryColor;
+        color: black ;
+    }
+}
+
+.btn{
+    margin: 0 20px;
+}
+
+.buttonGroup{
+    display: block;
+    margin: 0 auto;
+}
+
