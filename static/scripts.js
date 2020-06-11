@@ -1,5 +1,3 @@
-
-
 /*#####################################################
 #   Ajax Requests for Getting Countries and Users,    #
 #   Adding Countries and Deleting Countries           #
@@ -96,37 +94,52 @@ function deleteCountry() {
 ##################*/
 function countryCircles(){
 
-     $('#placeholder').empty();
+    $('#placeholder').empty();
 
-     d3.selectAll("svg > *").remove();
+    d3.selectAll("svg > *").remove();
 
-     const svg = d3.select('svg');
-     svg.style('background-color','grey');
+    const svg = d3.select('svg');
 
+    svg.style('background-color','grey');
 
-     $.get(("/countries"), function (response) {
-         var responseObj = JSON.parse(response);
-         console.log("Wait");
+    $.get(("/countries"), function (response) {
+        var responseObj = JSON.parse(response);
 
-        // a common thing is to 'wrap' some elements in a 'g' container (group)
-        // this is like wrapping html elements in a container div
-        const g = d3.select("svg").selectAll("g").data(responseObj);
-
-        // create new 'g' elements for each country
-        var en = g.enter().append("g")
-            .attr("transform",function(d){
-            return "translate("+ (Math.random() * 1350) + 40 + "," + (Math.random() * 650) + 40 +")"
+       // a common thing is to 'wrap' some elements in a 'g' container (group)
+       // this is like wrapping html elements in a container div
+       const g = d3.select("svg").selectAll("g").data(responseObj);
+       // create new 'g' elements for each country
+       
+       var en = g.enter().append("g")
+           .attr("transform",function(d){
+            if ( ( typeof d['data']['cell_phones_total'] !== 'undefined' ) && ( typeof d['data']['life_expectancy_years'] !== 'undefined' )){
+                return "translate("+ d['data']['cell_phones_total'][2010] / 1200 + "," + d['data']['life_expectancy_years'][2010] +")"
+            }
         });
 
-        // add a circle to each 'g'
-        var circle = en.append("circle")
-            .attr("r",function(d){ return Math.random() * 20 })
-            .attr("fill",function(d,i){ return i % 2 == 0 ? "#FF928B" : "#FFAC81" });
 
-        // add a text to each 'g'
-        en.append("text").text(function(d){ return d.name });;
+       // add a circle to each 'g'
+       var circle = en.append("circle")
+           .attr("r",function(d){ return Math.random() * 20 })
+           .attr("fill",function(d,i){ return "#FFAC81" });
+       // add a text to each 'g'
 
-     });
+       en.append("text").text(function(d){ return d.name });;
+    });
 };
+
+
+/* Convert the "" to ints so d3 can use them */
+
+function Value (Val){
+    if(Val == "")
+    {
+        return 0;
+    }
+    else
+    {
+        return Val;
+    }
+}
 
 
