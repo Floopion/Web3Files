@@ -117,8 +117,8 @@ $( document ).ready(function() {
     var timer;
     $("#slider").value = 2010;
     $("#play").on("click", function() {
-    var maxstep = 2015,
-        minstep = 2010;
+    var maxstep = 1970,
+        minstep = 2017;
     if (running == true) {
         $("#play").html("Play");
         running = false;
@@ -204,7 +204,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", width)
         .attr("y", height+50 )
-        .text("Total Cellphones per Capita")
+        .text("Internet Users (Per Capita)")
         .attr("class", "axisLabels");
         
 
@@ -220,7 +220,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", 0)
         .attr("y", -30 )
-        .text("Life expectancy")
+        .text("Life Expectancy (Years)")
         .attr("text-anchor", "start")
         .attr("class", "axisLabels");
 
