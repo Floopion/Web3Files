@@ -118,7 +118,7 @@ function countryCircles(){
         one can be made.
     */
     $('#placeholder').empty();
-    d3.selectAll("svg > *").remove();
+    d3.selectAll("svg").remove();
 
     /*
         Set the size an dimensions for the new SVG to take place. 
