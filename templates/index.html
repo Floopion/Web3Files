@@ -1,10 +1,9 @@
 {% include "header.html" %}
 <body>
     <main>
-        <div class="container mainContent" style="margin-top: 50px; height: 80vh; padding: 20px; overflow: hidden" >
+        <div class="container mainContent" >
             <div class="buttonGroup">
                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#oneModal">Find One Country</button>
-    {#            <button type="button" class="btn btn-info" onclick="getAllCountries()">Get All Country Data</button>#}
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Add New Country</button>
                 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delModal">Delete Country</button>
                 <button type="button" class="btn btn-outline-primary" onclick="countryCircles()">Load Graph</button>
@@ -12,9 +11,7 @@
 
             <p id="placeholder"></p>
 
-            <svg width="1350" height="70vh">
-
-            </svg>
+            <div id="viz"></div>
 
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">

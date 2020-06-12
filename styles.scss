@@ -17,6 +17,9 @@ footer{
     text-align: center;
     margin-bottom: 20px;
     color:$primaryColor;
+    position: absolute;
+    bottom: 0;
+    left: 46%; 
 }
 
 #placeholder{
@@ -101,10 +104,7 @@ footer{
     Main Graph Container
  */
 .mainContent{
-    margin-top: 50px;
-    height: 80vh;
     padding: 20px;
-    overflow: hidden;
 }
 
 /*
@@ -214,4 +214,24 @@ footer{
     &:hover{
         color: mediumvioletred;
     }
+}
+
+.bubbles{
+    stroke-width: 1px;
+    stroke: black;
+    opacity: .8
+  }
+
+.axisLabels{
+    fill: whitesmoke;
+    font-weight: bolder;
+}
+
+#viz{
+    margin-top: 50px;
+}
+
+.yearLabel{
+    text-shadow: #000 0px 0px 35px;
+    -webkit-font-smoothing: antialiased;
 }

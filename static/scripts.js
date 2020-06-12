@@ -94,52 +94,115 @@ function deleteCountry() {
 ##################*/
 function countryCircles(){
 
-    $('#placeholder').empty();
+    let year = 2010;
 
+    /*
+        If theres any errort text clear it, Clear the svg so that a new
+        one can be made.
+    */
+    $('#placeholder').empty();
     d3.selectAll("svg > *").remove();
 
-    const svg = d3.select('svg');
+    /*
+        Set the size an dimensions for the new SVG to take place. 
+    */
+    const margin = {top: 20, right: 40, bottom: 20, left: 40},
+    width = 1350 - margin.left - margin.right,
+    height = 680- margin.top - margin.bottom;
 
-    svg.style('background-color','grey');
+    const svg = d3.select("#viz").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .style('background-color','grey')
+    .style('overflow','visible')
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    /* 
+        Start the get request to fetch our data from the DB 
+    */
 
     $.get(("/countries"), function (response) {
         var responseObj = JSON.parse(response);
 
-       // a common thing is to 'wrap' some elements in a 'g' container (group)
-       // this is like wrapping html elements in a container div
-       const g = d3.select("svg").selectAll("g").data(responseObj);
-       // create new 'g' elements for each country
-       
-       var en = g.enter().append("g")
-           .attr("transform",function(d){
-            if ( ( typeof d['data']['cell_phones_total'] !== 'undefined' ) && ( typeof d['data']['life_expectancy_years'] !== 'undefined' )){
-                return "translate("+ d['data']['cell_phones_total'][2010] / 1200 + "," + d['data']['life_expectancy_years'][2010] +")"
-            }
-        });
+        /*
+            Fitler response to only have entries that contain data in you chosen fields, thus preventing "foo" undefined errors later on.
+        */
+        let filteredData = responseObj.filter(function(d){ return  (d['data']['cell_phones_total'] && d['data']['life_expectancy_years']) });
+
+        /*
+            Scale the graph to the size of our SVG, Append the text to show what is
+            on each axis.
+        */
+
+        console.log(filteredData)
+        // Add X axis
+        var x = d3.scaleLinear()
+            .domain([0, d3.max(filteredData, function(d) { return +d['data']['cell_phones_total'][year]; })])
+            .range([ 0, width ]);
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).ticks(3));
+
+        // Add X axis label:
+        svg.append("text")
+            .attr("text-anchor", "end")
+            .attr("x", width)
+            .attr("y", height+50 )
+            .text("Total Cellphones per Capita")
+            .attr("class", "axisLabels");
+            
+
+        // Add Y axis
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(filteredData, function(d) { return +d['data']['life_expectancy_years'][year]; })])
+            .range([ height, 0]);
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        // Add Y axis label:
+        svg.append("text")
+            .attr("text-anchor", "end")
+            .attr("x", 0)
+            .attr("y", -30 )
+            .text("Life expectancy")
+            .attr("text-anchor", "start")
+            .attr("class", "axisLabels");
+
+        svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width-650)
+        .attr("y", height-260)
+        .text(year)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#CDEAC0")
+        .attr("font-weight", "bolder")
+        .attr("font-size", "15rem")
+        .attr("class", "yearLabel");;
 
 
-       // add a circle to each 'g'
-       var circle = en.append("circle")
-           .attr("r",function(d){ return Math.random() * 20 })
-           .attr("fill",function(d,i){ return "#FFAC81" });
-       // add a text to each 'g'
+        //   // Add a scale for bubble size
+        // var z = d3.scaleSqrt()
+        // .domain([200000, 1310000000])
+        // .range([ 2, 30]);
 
-       en.append("text").text(function(d){ return d.name });;
+        /*
+         *      Data Circles  
+         */
+
+        // Add dots
+        svg.append('g')
+        .selectAll("dot")
+        .data(filteredData)
+        .enter()
+        .append("circle")
+            .attr("fill",function(d,i){ return "#FFAC81" })
+            .attr("class", function(d) { return "bubbles"})
+            .attr("cx", function (d) { return x(d['data']['cell_phones_total'][year]); } )
+            .attr("cy", function (d) { return y(d['data']['life_expectancy_years'][year]); } )
+            .attr("r", function (d) { return 5 } )
+            .append("text").text(function(d){ return d['name'] });
     });
 };
-
-
-/* Convert the "" to ints so d3 can use them */
-
-function Value (Val){
-    if(Val == "")
-    {
-        return 0;
-    }
-    else
-    {
-        return Val;
-    }
-}
 
 
