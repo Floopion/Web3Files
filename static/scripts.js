@@ -173,6 +173,9 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .attr("height", height + margin.top + margin.bottom)
     .style('background-color','grey')
     .style('overflow','visible')
+    .style('border-radius','15px')
+    .style('-webkit-filter','drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))')
+    .style('filter','drop-shadow( 18px 23px 5px rgba(0, 0, 0, 0.7))')
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
