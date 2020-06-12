@@ -3,6 +3,8 @@
 #   Adding Countries and Deleting Countries           #
 #####################################################*/
 
+    var rawdata ={};
+
 /*##############################
 #       GET Requests           #
 ###############################*/
@@ -92,9 +94,23 @@ function deleteCountry() {
 /*################
 #       D3       #
 ##################*/
+$( document ).ready(function() {
+    
+    $.get("/countries")
+    .done(function(response){
+        rawdata = JSON.parse(response);
+        $("#showButton").show();
+    })
+    .fail(function(xhr, status, error){
+        $('#placeholder').text("Could not connect to Database " + error + " please try again later.");
+    });
+    
+    $("#loader").hide();
+});
+
 function countryCircles(){
 
-    let year = 2010;
+    let year = 2016;
 
     /*
         If theres any errort text clear it, Clear the svg so that a new
@@ -122,13 +138,12 @@ function countryCircles(){
         Start the get request to fetch our data from the DB 
     */
 
-    $.get(("/countries"), function (response) {
-        var responseObj = JSON.parse(response);
+  
 
         /*
             Fitler response to only have entries that contain data in you chosen fields, thus preventing "foo" undefined errors later on.
         */
-        let filteredData = responseObj.filter(function(d){ return  (d['data']['cell_phones_total'] && d['data']['life_expectancy_years']) });
+        let filteredData = rawdata.filter(function(d){ return  (d['data']['cell_phones_total'] && d['data']['life_expectancy_years']) });
 
         /*
             Scale the graph to the size of our SVG, Append the text to show what is
@@ -187,8 +202,8 @@ function countryCircles(){
         // .range([ 2, 30]);
 
         /*
-         *      Data Circles  
-         */
+        *      Data Circles  
+        */
 
         // Add dots
         svg.append('g')
@@ -202,7 +217,4 @@ function countryCircles(){
             .attr("cy", function (d) { return y(d['data']['life_expectancy_years'][year]); } )
             .attr("r", function (d) { return 5 } )
             .append("text").text(function(d){ return d['name'] });
-    });
 };
-
-

@@ -6,11 +6,11 @@
                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#oneModal">Find One Country</button>
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Add New Country</button>
                 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delModal">Delete Country</button>
-                <button type="button" class="btn btn-outline-primary" onclick="countryCircles()">Load Graph</button>
+                <button type="button" class="btn btn-outline-primary" onclick="countryCircles()" style="display: none;" id="showButton">Show Visualization</button>
             </div>
 
             <p id="placeholder"></p>
-
+            <img id="loader" src="{{url_for('static', filename='ajax-loader.gif')}}"/>
             <div id="viz"></div>
 
             <div class="modal fade" id="myModal" role="dialog">
