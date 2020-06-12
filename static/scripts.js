@@ -94,18 +94,19 @@ function deleteCountry() {
 /*################
 #       D3       #
 ##################*/
+
 $( document ).ready(function() {
     
     $.get("/countries")
     .done(function(response){
         rawdata = JSON.parse(response);
+        $("#loader").hide();
         $("#showButton").show();
     })
     .fail(function(xhr, status, error){
         $('#placeholder').text("Could not connect to Database " + error + " please try again later.");
     });
-    
-    $("#loader").hide();
+
 });
 
 function countryCircles(){
