@@ -153,7 +153,21 @@ footer{
         color: black ;
     }
 
-}.btn-success{
+}
+
+.btn-outline-warning{
+    border-color: $quinaryColor;
+    color: $quinaryColor ;
+    &:hover{
+        text-decoration: none;
+        background-color: $quinaryColor !important;
+        border-color: $quinaryColor;
+        color: black ;
+    }
+
+}
+
+.btn-success{
     border-color: $primaryColor;
     color: black;
     background-color: $primaryColor !important;

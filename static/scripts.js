@@ -71,7 +71,6 @@ function getFormData() {
             .prop('checked', false)
             .prop('selected', false);
     }
-
 };
 
 
@@ -97,6 +96,11 @@ function deleteCountry() {
 
 $( document ).ready(function() {
     
+   /*
+    *   Start the Get request for our country data, displaying a loder while it is being loaded
+    *   If for any reason the data can be loaded display the returned error message. 
+    */
+
     $.get("/countries")
     .done(function(response){
         rawdata = JSON.parse(response);
@@ -107,11 +111,48 @@ $( document ).ready(function() {
         $('#placeholder').text("Could not connect to Database " + error + " please try again later.");
     });
 
+    var xValue = "cell_phones_total";
+    var yValue = "life_expectancy_years";
+    var running = false;
+    var timer;
+    $("#slider").value = 2010;
+    $("#play").on("click", function() {
+    var maxstep = 2015,
+        minstep = 2010;
+    if (running == true) {
+        $("#play").html("Play");
+        running = false;
+        clearInterval(timer);
+    } else if (running == false) {
+        $("#play").html("Pause");
+        sliderValue = $("#slider").val();
+        timer = setInterval(function() {
+            if (sliderValue >= maxstep) {
+                clearInterval(timer);
+                return;
+            }
+            sliderValue++;
+            countryCircles(xValue, yValue, sliderValue);
+            setTimeout(function() {
+                $("#slider").val(sliderValue);
+                $('#range').html(sliderValue);
+                $("#slider").val(sliderValue);
+                year = $("#slider").val();
+
+            }, 500)
+        }, 3000);
+        running = true;
+    }
+    });
+
+
 });
 
-function countryCircles(){
+function countryCircles(xAxisDataKey,yAxisDataKey,year){
 
-    let year = 2016;
+    // let year = 2016;
+    // let xAxisDataKey = "cell_phones_total";
+    // let yAxisDataKey = "life_expectancy_years";
 
     /*
         If theres any errort text clear it, Clear the svg so that a new
@@ -135,87 +176,73 @@ function countryCircles(){
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    /* 
-        Start the get request to fetch our data from the DB 
+
+    /*
+        Fitler response to only have entries that contain data in you chosen fields, thus preventing "foo" undefined errors later on.
+    */
+    let filteredData = rawdata.filter(function(d){ return  (d['data'][xAxisDataKey] && d['data'][yAxisDataKey]) });
+
+    /*
+        Scale the graph to the size of our SVG, Append the text to show what is
+        on each axis.
     */
 
-  
+    console.log(filteredData)
+    // Add X axis
+    var x = d3.scaleLinear()
+        .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][year]; })])
+        .range([ 0, width ]);
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x).ticks(3));
 
-        /*
-            Fitler response to only have entries that contain data in you chosen fields, thus preventing "foo" undefined errors later on.
-        */
-        let filteredData = rawdata.filter(function(d){ return  (d['data']['cell_phones_total'] && d['data']['life_expectancy_years']) });
+    // Add X axis label:
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height+50 )
+        .text("Total Cellphones per Capita")
+        .attr("class", "axisLabels");
+        
 
-        /*
-            Scale the graph to the size of our SVG, Append the text to show what is
-            on each axis.
-        */
+    // Add Y axis
+    var y = d3.scaleLinear()
+        .domain([0, d3.max(filteredData, function(d) { return +d['data'][yAxisDataKey][year]; })])
+        .range([ height, 0]);
+    svg.append("g")
+        .call(d3.axisLeft(y));
 
-        console.log(filteredData)
-        // Add X axis
-        var x = d3.scaleLinear()
-            .domain([0, d3.max(filteredData, function(d) { return +d['data']['cell_phones_total'][year]; })])
-            .range([ 0, width ]);
-        svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x).ticks(3));
+    // Add Y axis label:
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", 0)
+        .attr("y", -30 )
+        .text("Life expectancy")
+        .attr("text-anchor", "start")
+        .attr("class", "axisLabels");
 
-        // Add X axis label:
-        svg.append("text")
-            .attr("text-anchor", "end")
-            .attr("x", width)
-            .attr("y", height+50 )
-            .text("Total Cellphones per Capita")
-            .attr("class", "axisLabels");
-            
-
-        // Add Y axis
-        var y = d3.scaleLinear()
-            .domain([0, d3.max(filteredData, function(d) { return +d['data']['life_expectancy_years'][year]; })])
-            .range([ height, 0]);
-        svg.append("g")
-            .call(d3.axisLeft(y));
-
-        // Add Y axis label:
-        svg.append("text")
-            .attr("text-anchor", "end")
-            .attr("x", 0)
-            .attr("y", -30 )
-            .text("Life expectancy")
-            .attr("text-anchor", "start")
-            .attr("class", "axisLabels");
-
-        svg.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", width-650)
-        .attr("y", height-260)
-        .text(year)
-        .attr("text-anchor", "middle")
-        .attr("fill", "#CDEAC0")
-        .attr("font-weight", "bolder")
-        .attr("font-size", "15rem")
-        .attr("class", "yearLabel");;
+    svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", width-650)
+    .attr("y", height-260)
+    .text(year)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#CDEAC0")
+    .attr("font-weight", "bolder")
+    .attr("font-size", "15rem")
+    .attr("class", "yearLabel");;
 
 
-        //   // Add a scale for bubble size
-        // var z = d3.scaleSqrt()
-        // .domain([200000, 1310000000])
-        // .range([ 2, 30]);
-
-        /*
-        *      Data Circles  
-        */
-
-        // Add dots
-        svg.append('g')
-        .selectAll("dot")
-        .data(filteredData)
-        .enter()
-        .append("circle")
-            .attr("fill",function(d,i){ return "#FFAC81" })
-            .attr("class", function(d) { return "bubbles"})
-            .attr("cx", function (d) { return x(d['data']['cell_phones_total'][year]); } )
-            .attr("cy", function (d) { return y(d['data']['life_expectancy_years'][year]); } )
-            .attr("r", function (d) { return 5 } )
-            .append("text").text(function(d){ return d['name'] });
+    // Add dots
+    svg.append('g')
+    .selectAll("dot")
+    .data(filteredData)
+    .enter()
+    .append("circle")
+        .attr("fill",function(d,i){ return "#FFAC81" })
+        .attr("class", function(d) { return "bubbles"})
+        .attr("cx", function (d) { return x(d['data'][xAxisDataKey][year]); } )
+        .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
+        .attr("r", function (d) { return 5 } )
+        .append("text").text(function(d){ return d['name'] });
 };
