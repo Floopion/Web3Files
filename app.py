@@ -97,19 +97,6 @@ def drop_DB():
     Country.drop_collection()
     return "Countries table has Been Deleted"
 
-#############################################################
-# User GET API`S Mainly used for testing. May remove later  #
-#############################################################
-@app.route('/users', methods=['GET'])
-@app.route('/users/<user_id>', methods=['GET'])
-def getUsers(user_id=None):
-    users = None
-    if user_id is None:
-        users = User.objects
-    else:
-        users = User.objects.get(id=user_id)
-    return users.to_json()
-
 
 #############################################################
 #   Country GET API`S for both single and multi record.     #
@@ -126,8 +113,10 @@ def getCountries(count_id=None):
         return countries.to_json(), 200
     except:
         if not countries:
+            console.log("404, Country not Found");
             return "NOT FOUND", 404
         else:
+            console.log("500, Internal Server Error")
             return "INTERNAL SERVER ERROR", 500
 
 
@@ -141,9 +130,11 @@ def postCountries():
         nPopulation = request.form['cPop']
         newCountry = Country(name=nName, population=nPopulation)
         newCountry.save()
-        return "Success!", 200
+        console.log("201, Entry Created")
+        return "Created", 201
     except:
-        return "Something went Wrong, Please try again", 500
+        console.log("500, Internal Server Error")
+        return "INTERNAL SERVER ERROR", 500
 
 
 #########################
@@ -156,9 +147,11 @@ def deleteCountry():
         country = request.form['name']
         print(country)
         Country.objects(name=country).delete()
-        return "Success!", 200
+        console.log("200, Entry Deleted")
+        return "OK", 200
     except:
-        return "Something went Wrong, Please try again", 404
+        console.log("500, Internal Server Error")
+        return "INTERNAL SERVER ERROR", 500
 
 
 #################

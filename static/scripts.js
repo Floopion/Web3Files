@@ -190,7 +190,6 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         on each axis.
     */
 
-    console.log(filteredData)
     // Add X axis
     var x = d3.scaleLinear()
         .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][year]; })])
@@ -236,16 +235,16 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .attr("class", "yearLabel");;
 
 
-    // Add dots
-    svg.append('g')
-    .selectAll("dot")
-    .data(filteredData)
-    .enter()
-    .append("circle")
-        .attr("fill",function(d,i){ return "#FFAC81" })
-        .attr("class", function(d) { return "bubbles"})
-        .attr("cx", function (d) { return x(d['data'][xAxisDataKey][year]); } )
-        .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
-        .attr("r", function (d) { return 5 } )
-        .append("text").text(function(d){ return d['name'] });
+// Add dots
+svg.append('g')
+.selectAll("dot")
+.data(filteredData)
+.enter()
+.append("circle")
+    .attr("fill",function(d,i){ return "#FFAC81" })
+    .attr("class", function(d) { return "bubbles"})
+    .attr("cx", function (d) { return x(d['data'][xAxisDataKey][year]); } )
+    .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
+    .attr("r", function (d) { return 5 } )
+    .append("text").text(function(d){ return d['name'] });
 };
