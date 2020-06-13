@@ -4,6 +4,7 @@
 #####################################################*/
 
     var rawdata ={};
+    var running = false;
 
 /*##############################
 #       GET Requests           #
@@ -105,40 +106,61 @@ $( document ).ready(function() {
         $('#placeholder').text("Could not connect to database " + error + " please try again later.");
     });
 
-    var xValue = "cell_phones_total";
-    var yValue = "life_expectancy_years";
-    var running = false;
-    var timer;
-    $("#slider").value = 2010;
-    $("#play").on("click", function() {
-    var maxstep = 1970,
-        minstep = 2017;
-    if (running == true) {
-        $("#play").html("Play");
-        running = false;
-        clearInterval(timer);
-    } else if (running == false) {
-        $("#play").html("Pause");
-        sliderValue = $("#slider").val();
-        timer = setInterval(function() {
-            if (sliderValue >= maxstep) {
-                clearInterval(timer);
-                return;
-            }
-            sliderValue++;
-            countryCircles(xValue, yValue, sliderValue);
-            setTimeout(function() {
-                $("#slider").val(sliderValue);
-                $('#range').html(sliderValue);
-                $("#slider").val(sliderValue);
-                year = $("#slider").val();
 
-            }, 500)
-        }, 3000);
-        running = true;
-    }
+    /* 
+    *   Scripts for both the play button and the slider behaviours
+    *
+    */
+
+    var xValue = "cell_phones_total";
+    var yValue = "internet_users";
+    var timer;
+
+    $("#play").on("click", function() {
+        var minstep = 1970,
+            maxstep = 2017;
+
+        if (running == true) {
+            $("#play").html("Play");
+            running = false;
+            clearInterval(timer);
+        } else {
+            $("#play").html("Pause");
+            sliderValue = $("#slider").val();
+            timer = setInterval(function() {
+
+                if (sliderValue >= maxstep) {
+                    clearInterval(timer);
+                    return;
+                }
+
+                sliderValue++;
+                countryCircles(xValue, yValue, sliderValue);
+
+                setTimeout(function() {
+                    $("#slider").val(sliderValue);
+                    $('#range').html(sliderValue);
+                    $("#slider").val(sliderValue);
+                    year = $("#slider").val();
+                }, 500)
+
+            }, 750);
+
+            running = true;
+        }
     });
 
+    /**
+     * Only update the graph based on slider movement if the play button is not running, This stops 
+     * the unintended behavior of the graph updating twice when the user is playing the viz
+     */
+
+    $(document).on('input', '#slider', function() {
+        if (running == false){
+            sliderValue = $("#slider").val();
+            countryCircles(xValue, yValue, sliderValue);
+        }
+    });
 
 });
 
