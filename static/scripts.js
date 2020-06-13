@@ -8,13 +8,6 @@
 /*##############################
 #       GET Requests           #
 ###############################*/
-function getAllCountries() {
-
-    $.get(("/countries"), function (response) {
-        console.log(response);
-        $('#placeholder').text(response);
-    });
-};
 
 function findCountry() {
 
@@ -108,7 +101,8 @@ $( document ).ready(function() {
         $("#showButton").show();
     })
     .fail(function(xhr, status, error){
-        $('#placeholder').text("Could not connect to Database " + error + " please try again later.");
+        $("#loader").hide();
+        $('#placeholder').text("Could not connect to database " + error + " please try again later.");
     });
 
     var xValue = "cell_phones_total";

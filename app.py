@@ -90,12 +90,12 @@ def data_loader():
                 country.data = dict
 
             country.save()
-    return "success"
+    return "OK", 200
 
 @app.route('/deleteTable')
 def drop_DB():
     Country.drop_collection()
-    return "Countries table has Been Deleted"
+    return "OK", 200
 
 
 #############################################################
@@ -113,10 +113,8 @@ def getCountries(count_id=None):
         return countries.to_json(), 200
     except:
         if not countries:
-            console.log("404, Country not Found");
             return "NOT FOUND", 404
         else:
-            console.log("500, Internal Server Error")
             return "INTERNAL SERVER ERROR", 500
 
 
@@ -129,11 +127,8 @@ def postCountries():
         nName = request.form['cName']
         nPopulation = request.form['cPop']
         newCountry = Country(name=nName, population=nPopulation)
-        newCountry.save()
-        console.log("201, Entry Created")
         return "Created", 201
     except:
-        console.log("500, Internal Server Error")
         return "INTERNAL SERVER ERROR", 500
 
 
@@ -145,12 +140,9 @@ def deleteCountry():
 
     try:
         country = request.form['name']
-        print(country)
         Country.objects(name=country).delete()
-        console.log("200, Entry Deleted")
         return "OK", 200
     except:
-        console.log("500, Internal Server Error")
         return "INTERNAL SERVER ERROR", 500
 
 
@@ -158,4 +150,4 @@ def deleteCountry():
 #   Run App.    #
 #################
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+    app.run()
