@@ -5,6 +5,7 @@
 
     var rawdata ={};
     var running = false;
+    var svg = null;
 
 /*##############################
 #       GET Requests           #
@@ -110,10 +111,10 @@ $( document ).ready(function() {
     *
     */
 
-    var xValue = $('#xAxisOption').val();
-    var yValue = $('#yAxisOption').val();
     var timer;
 
+    //Listen out for the play button to be clicked, when it is, assign the min and max levels ad check the viz is running or not. 
+    // if it is, check if the slider is below the max ammount if its not stop the timer, if it is increment it and draw the next step in the sequence 
     $("#play").on("click", function() {
         var minstep = 1960,
             maxstep = 2016;
@@ -133,7 +134,7 @@ $( document ).ready(function() {
                 }
 
                 sliderValue++;
-                countryCircles(xValue, yValue, sliderValue);
+                countryCircles(false);
 
                 setTimeout(function() {
                     $("#slider").val(sliderValue);
@@ -156,14 +157,14 @@ $( document ).ready(function() {
     $(document).on('input', '#slider', function() {
         if (running == false){
             sliderValue = $("#slider").val();
-            countryCircles(xValue, yValue, sliderValue);
+            countryCircles(false);
         }
     });
 
 
     // On change listen event to run the draw function when an option box is changed
     $('#xAxisOption, #yAxisOption').change(function() {
-       countryCircles();
+       countryCircles(false);
     });
 
 });
@@ -177,9 +178,8 @@ $( document ).ready(function() {
  * 
  */
 
-function countryCircles(){
-
-
+function countryCircles(create){
+    
     // Get the Keys from the option box values
     let xAxisDataKey = $('#xAxisOption').val();
     let yAxisDataKey = $('#yAxisOption').val();
@@ -190,11 +190,10 @@ function countryCircles(){
 
     let year = $('#slider').val();
     /*
-        If theres any errort text clear it, Clear the svg so that a new
+        If theres any error text clear it, Clear the svg so that a new
         one can be made.
     */
     $('#placeholder').empty();
-    d3.selectAll("svg").remove();
 
     /*
         Set the size an dimensions for the new SVG to take place. 
@@ -203,18 +202,19 @@ function countryCircles(){
     width = 1350 - margin.left - margin.right,
     height = 600- margin.top - margin.bottom;
 
-    //Create the SVG and give it a nice drop shadow
-    const svg = d3.select("#viz").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .style('background-color','grey')
-    .style('overflow','visible')
-    .style('border-radius','15px')
-    .style('-webkit-filter','drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))')
-    .style('filter','drop-shadow( 18px 23px 5px rgba(0, 0, 0, 0.7))')
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    //Create the SVG and give it a nice drop shadow\
+    if(create){
+         svg = d3.select("#viz").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .style('background-color','grey')
+        .style('overflow','visible')
+        .style('border-radius','15px')
+        .style('-webkit-filter','drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))')
+        .style('filter','drop-shadow( 18px 23px 5px rgba(0, 0, 0, 0.7))')
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    }
 
     /*
         Fitler response to only have entries that contain data in you chosen fields, thus preventing "foo" undefined errors later on.
@@ -233,9 +233,9 @@ function countryCircles(){
         .range([ 0, width ]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).ticks(5).tickSize(-height).tickSizeOuter(0));
+        .call(d3.axisBottom(x).ticks(8).tickSize(-height).tickSizeOuter(0));
 
-    // Add X axis label:
+    // Add Y axis set the max on the axis to the max for the last year that we display, I have assumed in most cases all of the data increments so the max of our final year should be the max for the whole dataset.
     svg.append("text")
         .attr("text-anchor", "end")
         .attr("x", width)
@@ -243,12 +243,12 @@ function countryCircles(){
         .text(xAxisLabel)
         .attr("class", "axisLabels");
         
-    // Add Y axis
+    // Add Y axis set the max on the axis to the max for the last year that we display, I have assumed in most cases all of the data increments so the max of our final year should be the max for the whole dataset.
     var y = d3.scaleLinear()
         .domain([0, d3.max(filteredData, function(d) { return +d['data'][yAxisDataKey][2017]})])    //Get the max of the last availible year as that will be the mas the graph gets too
         .range([ height, 0]);
     svg.append("g")
-        .call(d3.axisLeft(y).ticks(5).tickSize(-width).tickSizeOuter(0));
+        .call(d3.axisLeft(y).ticks(8).tickSize(-width).tickSizeOuter(0));
 
     // Add Y axis label:
     svg.append("text")
@@ -311,20 +311,31 @@ function countryCircles(){
       .style("opacity", 0)
   }
 
-    // Add dots
-    svg.append('g')
-    .selectAll("dot")
-    .data(filteredData)
-    .enter()
-    .append("circle")
-    .attr("fill",function(d,i){ return "#FFAC81" })
-    .attr("class", function(d) { return "bubbles"})
-    .attr("cx", function (d) { return x(+d['data'][xAxisDataKey][year]); } )
-    .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
-    .attr("r",  function (d) { return z(d['data']['population_total'][year]); } )
-    .on("mouseover", showTooltip )
-    .on("mousemove", moveTooltip )
-    .on("mouseleave", hideTooltip );
+    // Add dots appending the x y and radius attributes, and teling it what to show / hode the tooltip, when the mouse hovers ove the circle
+    if(create){
+        svg.append('g')
+        .selectAll("dot")
+        .data(filteredData)
+        .enter()
+        .append("circle")
+        .attr("fill",function(d,i){ return "#FF928B" })
+        .attr("class", function(d) { return "bubbles"})
+        .attr("cx", function (d) { return x(+d['data'][xAxisDataKey][year]); } )
+        .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
+        .attr("r",  function (d) { return z(d['data']['population_total'][year]); } )
+        .on("mouseover", showTooltip )
+        .on("mousemove", moveTooltip )
+        .on("mouseleave", hideTooltip );
+    }else{
+        d3.selectAll("circle")
+        .data(filteredData)
+        .transition()
+        .delay(100)
+        .duration(800)
+        .attr("cx", function (d) { return x(+d['data'][xAxisDataKey][year]); } )
+        .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
+        .attr("r",  function (d) { return z(d['data']['population_total'][year]); } );
+    }
 
 };
 
