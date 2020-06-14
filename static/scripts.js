@@ -112,8 +112,8 @@ $( document ).ready(function() {
     *
     */
 
-    var xValue = "cell_phones_total";
-    var yValue = "internet_users";
+    var xValue = "internet_users";
+    var yValue = "life_expectancy_years";
     var timer;
 
     $("#play").on("click", function() {
@@ -208,7 +208,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
 
     // Add X axis
     var x = d3.scaleLinear()
-        .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][year]; })])
+        .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][year]})])
         .range([ 0, width ]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -219,7 +219,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", width)
         .attr("y", height+50 )
-        .text("Internet Users (Per Capita)")
+        .text("Internet Users (Hundred Thousand)")
         .attr("class", "axisLabels");
         
 
@@ -250,17 +250,56 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .attr("font-size", "15rem")
     .attr("class", "yearLabel");;
 
+      // Add a scale for bubble size
+    var z = d3.scaleLinear()
+    .domain([200000, 1310000000])
+    .range([ 4, 40]);
 
-// Add dots
-svg.append('g')
-.selectAll("dot")
-.data(filteredData)
-.enter()
-.append("circle")
+    // -1- Create a tooltip div that is hidden by default:
+    var tooltip = d3.select("#viz")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "black")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("color", "white")
+
+    // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+  var showTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+    tooltip
+      .style("opacity", 1)
+      .html("Country: " + d['name'] + "<br>" + "Life Expectancy (Years): " + d['data'][yAxisDataKey][year] + "<br>" + "Internet Users (Hundred Thousand): " + d['data'][xAxisDataKey][year] + "<br>" + "Population: " + d['data']['population_total'][year] )
+      .style("left", (d3.mouse(this)[0]+30) + "px")
+      .style("top", (d3.mouse(this)[1]+30) + "px")
+  }
+  var moveTooltip = function(d) {
+    tooltip
+      .style("left", (d3.mouse(this)[0]+30) + "px")
+      .style("top", (d3.mouse(this)[1]+30) + "px")
+  }
+  var hideTooltip = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+
+    // Add dots
+    svg.append('g')
+    .selectAll("dot")
+    .data(filteredData)
+    .enter()
+    .append("circle")
     .attr("fill",function(d,i){ return "#FFAC81" })
     .attr("class", function(d) { return "bubbles"})
     .attr("cx", function (d) { return x(d['data'][xAxisDataKey][year]); } )
     .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
-    .attr("r", function (d) { return 5 } )
-    .append("text").text(function(d){ return d['name'] });
+    .attr("r",  function (d) { return z(d['data']['population_total'][year]); } )
+    .on("mouseover", showTooltip )
+    .on("mousemove", moveTooltip )
+    .on("mouseleave", hideTooltip );
 };

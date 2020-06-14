@@ -233,7 +233,10 @@ footer{
 .bubbles{
     stroke-width: 1px;
     stroke: black;
-    opacity: .8
+    opacity: .8;
+    &:hover{
+        stroke:$primaryColor;
+    }
   }
 
 .axisLabels{
