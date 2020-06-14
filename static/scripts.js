@@ -188,6 +188,13 @@ function countryCircles(create){
     let xAxisLabel = $( "#xAxisOption option:selected" ).text();
     let yAxisLabel = $( "#yAxisOption option:selected" ).text();
 
+
+    // Now that the function is split into create and update i need d3 to remove the lines and year to prevent ovelapping
+    // I cant just remove the whole svg as that will remove the original circle positions and the transition will not work.
+    d3.selectAll("line").remove();
+    d3.selectAll("text").remove();
+
+
     let year = $('#slider').val();
     /*
         If theres any error text clear it, Clear the svg so that a new
@@ -330,8 +337,8 @@ function countryCircles(create){
         d3.selectAll("circle")
         .data(filteredData)
         .transition()
-        .delay(100)
-        .duration(800)
+        .delay(0)
+        .duration(900)
         .attr("cx", function (d) { return x(+d['data'][xAxisDataKey][year]); } )
         .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
         .attr("r",  function (d) { return z(d['data']['population_total'][year]); } );
