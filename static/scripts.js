@@ -209,13 +209,14 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         on each axis.
     */
 
+    
     // Add X axis
     var x = d3.scaleLinear()
         .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][2017]})]) //Get the max of the last availible year as that will be the mas the graph gets too
         .range([ 0, width ]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).ticks(3));
+        .call(d3.axisBottom(x).ticks(5).tickSize(-height).tickSizeOuter(0));
 
     // Add X axis label:
     svg.append("text")
@@ -230,7 +231,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .domain([0, d3.max(filteredData, function(d) { return +d['data'][yAxisDataKey][2017]})])    //Get the max of the last availible year as that will be the mas the graph gets too
         .range([ height, 0]);
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y).ticks(5).tickSize(-width).tickSizeOuter(0));
 
     // Add Y axis label:
     svg.append("text")
