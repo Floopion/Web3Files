@@ -162,6 +162,15 @@ $( document ).ready(function() {
 
 });
 
+/**
+ * 
+ *      This is the man Viz d3 draw method
+ *      The learning material and alot of the 
+ *      boiler-plate code was sourced from
+ *      https://www.d3-graph-gallery.com/
+ * 
+ */
+
 function countryCircles(xAxisDataKey,yAxisDataKey,year){
 
     /*
