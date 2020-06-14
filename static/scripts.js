@@ -237,7 +237,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     svg.append("text")
     .attr("text-anchor", "middle")
     .attr("x", width-650)
-    .attr("y", height-260)
+    .attr("y", height-220)
     .text(year)
     .attr("text-anchor", "middle")
     .attr("fill", "#CDEAC0")
