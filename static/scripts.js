@@ -32,11 +32,9 @@ function getFormData() {
 
     let country = {};
     let name = false;
-    let pop = false;
 
     if ($('#cName').val().length != 0  ) {
         country["cName"] = $('#cName').val();
-        console.log(country);
         name = true;
     } else {
         alert("Please Enter a Country name");
@@ -53,7 +51,7 @@ function getFormData() {
     country["cPop"] = $('#cPop').val();
     console.log(country);
 
-    if (pop && name) {
+    if (name) {
 
         $.post(("/countries"), country, function (data) {
             console.log(data);
@@ -166,10 +164,6 @@ $( document ).ready(function() {
 
 function countryCircles(xAxisDataKey,yAxisDataKey,year){
 
-    // let year = 2016;
-    // let xAxisDataKey = "cell_phones_total";
-    // let yAxisDataKey = "life_expectancy_years";
-
     /*
         If theres any errort text clear it, Clear the svg so that a new
         one can be made.
@@ -182,7 +176,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     */
     const margin = {top: 20, right: 40, bottom: 20, left: 40},
     width = 1350 - margin.left - margin.right,
-    height = 680- margin.top - margin.bottom;
+    height = 600- margin.top - margin.bottom;
 
     const svg = d3.select("#viz").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -239,6 +233,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "start")
         .attr("class", "axisLabels");
 
+    // Add the year to the center of the svg  
     svg.append("text")
     .attr("text-anchor", "middle")
     .attr("x", width-650)
@@ -265,7 +260,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .style("padding", "10px")
     .style("color", "white")
 
-    // -2- Create 3 functions to show / update (when mouse move but stay on same circle) / hide the tooltip
+    //Tool tip fuctions to show and hide them on bubble rollover
   var showTooltip = function(d) {
     tooltip
       .transition()
@@ -274,7 +269,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
       .style("opacity", 1)
       .html("Country: " + d['name'] + "<br>" + "Life Expectancy (Years): " + d['data'][yAxisDataKey][year] + "<br>" + "Internet Users (Hundred Thousand): " + d['data'][xAxisDataKey][year] + "<br>" + "Population: " + d['data']['population_total'][year] )
       .style("left", (d3.mouse(this)[0]+30) + "px")
-      .style("top", (d3.mouse(this)[1]+30) + "px")
+      .style("top", (d3.mouse(this)[1]-30) + "px")
   }
   var moveTooltip = function(d) {
     tooltip
@@ -302,4 +297,6 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .on("mouseover", showTooltip )
     .on("mousemove", moveTooltip )
     .on("mouseleave", hideTooltip );
+
+    $('#vizControls').show();
 };

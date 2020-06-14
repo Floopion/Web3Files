@@ -6,14 +6,17 @@
                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#oneModal">Find One Country</button>
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Add New Country</button>
                 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delModal">Delete Country</button>
-                <button type="button" class="btn btn-outline-primary" onclick="countryCircles('internet_users','life_expectancy_years',2010)">Show Visualization</button>
-                <input type="range" id="slider" name="slider" min="1970" max="2017" value="1970">
-                <button name="play" class="btn btn-outline-warning" id="play">Play</button>  
+                <button type="button" class="btn btn-outline-primary" onclick="countryCircles('internet_users','life_expectancy_years',2010)">Show Visualization</button>  
             </div>
 
             <p id="placeholder"></p>
             <img id="loader" src="{{url_for('static', filename='ajax-loader.gif')}}"/>
             <div id="viz"></div>
+
+            <div class="vizControls" id="vizControls" style="display: none;">
+              <button name="play" class="btn btn-outline-warning" id="play">Play</button>
+              <input type="range" id="slider" name="slider" min="1970" max="2017" value="1970" class="slider">
+            </div>
 
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
@@ -28,10 +31,6 @@
                           <div class="form-group">
                             <label for="cName">Country Name</label>
                             <input type="text" class="form-control" id="cName" placeholder="Country Name" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="cPop">Population</label>
-                            <input type="number" class="form-control" id="cPop" placeholder="Population" required>
                           </div>
                       </div>
                         <div class="modal-footer">
@@ -91,9 +90,6 @@
 
         </div>
     </main>
-<footer class="footer">
-    &copy Dion Bedford
-</footer>
 </body>
 </html>
 <script>

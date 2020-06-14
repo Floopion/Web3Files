@@ -158,6 +158,8 @@ footer{
 .btn-outline-warning{
     border-color: $quinaryColor;
     color: $quinaryColor ;
+    display: inline-block;
+    margin-top: -10px;
     &:hover{
         text-decoration: none;
         background-color: $quinaryColor !important;
@@ -260,3 +262,110 @@ footer{
     width: 100px;
     height: 100px;
 }
+
+.vizControls{
+   margin-top: 65px;
+   filter: drop-shadow(rgba(0, 0, 0, 0.7) 18px 23px 5px); 
+}
+
+
+/*
+*       Track Styling 
+*       Generated from http://danielstern.ca/range.css/?ref=css-tricks#/
+*/
+
+  input[type=range] {
+    width: 90%;
+    margin: 13.85px 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+    display: inline-block;
+    float: right;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    background: #cdeac0;
+    border: 0.1px solid #000000;
+    border-radius: 24.8px;
+    width: 100%;
+    height: 8.3px;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    margin-top: -13.95px;
+    width: 16px;
+    height: 36px;
+    background: #efe9ae;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #cdeac0;
+  }
+  input[type=range]::-moz-range-track {
+    background: #cdeac0;
+    border: 0.1px solid #000000;
+    border-radius: 24.8px;
+    width: 100%;
+    height: 8.3px;
+    cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 16px;
+    height: 36px;
+    background: #efe9ae;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    border-width: 14.85px 0;
+    color: transparent;
+    width: 100%;
+    height: 8.3px;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-fill-lower {
+    background: #cdeac0;
+    border: 0.1px solid #000000;
+    border-radius: 49.6px;
+  }
+  input[type=range]::-ms-fill-upper {
+    background: #cdeac0;
+    border: 0.1px solid #000000;
+    border-radius: 49.6px;
+  }
+  input[type=range]::-ms-thumb {
+    width: 16px;
+    height: 36px;
+    background: #efe9ae;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 0px;
+    /*Needed to keep the Edge thumb centred*/
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: #cdeac0;
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: #cdeac0;
+  }
+  /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+  how to remove the virtical space around the range input in IE*/
+  @supports (-ms-ime-align:auto) {
+    /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+    input[type=range] {
+      margin: 0;
+      /*Edge starts the margin from the thumb, not the track as other browsers do*/
+    }
+  }
+  
+  
+
