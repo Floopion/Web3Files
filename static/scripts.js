@@ -115,8 +115,8 @@ $( document ).ready(function() {
     var timer;
 
     $("#play").on("click", function() {
-        var minstep = 1970,
-            maxstep = 2017;
+        var minstep = 1960,
+            maxstep = 2016;
 
         if (running == true) {
             $("#play").html("Play");
