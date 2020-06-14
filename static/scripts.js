@@ -111,7 +111,7 @@ $( document ).ready(function() {
     */
 
     var xValue = "internet_users";
-    var yValue = "life_expectancy_years";
+    var yValue = "cell_phones";
     var timer;
 
     $("#play").on("click", function() {
@@ -237,7 +237,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", 0)
         .attr("y", -30 )
-        .text("Life Expectancy (Years)")
+        .text("Ammount of Cellphones (Per 100 People)")
         .attr("text-anchor", "start")
         .attr("class", "axisLabels");
 
@@ -275,7 +275,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
       .duration(200)
     tooltip
       .style("opacity", 1)
-      .html("Country: " + d['name'] + "<br>" + "Life Expectancy (Years): " + d['data'][yAxisDataKey][year] + "<br>" + "Internet Users (Of the Population): " + (+d['data'][xAxisDataKey][year]) + "% <br>" + "Population: " + d['data']['population_total'][year] )
+      .html("Country: " + d['name'] + "<br>" + "Cellphones (Per 100 People): " + d['data'][yAxisDataKey][year] + "<br>" + "Internet Users (Of the Population): " + (+d['data'][xAxisDataKey][year]) + "% <br>" + "Population: " + d['data']['population_total'][year] )
       .style("left", (d3.mouse(this)[0]+30) + "px")
       .style("top", (d3.mouse(this)[1]-30) + "px")
   }
