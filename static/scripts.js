@@ -110,8 +110,8 @@ $( document ).ready(function() {
     *
     */
 
-    var xValue = "internet_users";
-    var yValue = "cell_phones";
+    var xValue = $('#xAxisOption').val();
+    var yValue = $('#yAxisOption').val();
     var timer;
 
     $("#play").on("click", function() {
@@ -160,6 +160,12 @@ $( document ).ready(function() {
         }
     });
 
+
+    // On change listen event to run the draw function when an option box is changed
+    $('#xAxisOption, #yAxisOption').change(function() {
+       countryCircles();
+    });
+
 });
 
 /**
@@ -171,8 +177,18 @@ $( document ).ready(function() {
  * 
  */
 
-function countryCircles(xAxisDataKey,yAxisDataKey,year){
+function countryCircles(){
 
+
+    // Get the Keys from the option box values
+    let xAxisDataKey = $('#xAxisOption').val();
+    let yAxisDataKey = $('#yAxisOption').val();
+
+    // Use the text from the Option box to label the Axis
+    let xAxisLabel = $( "#xAxisOption option:selected" ).text();
+    let yAxisLabel = $( "#yAxisOption option:selected" ).text();
+
+    let year = $('#slider').val();
     /*
         If theres any errort text clear it, Clear the svg so that a new
         one can be made.
@@ -187,6 +203,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     width = 1350 - margin.left - margin.right,
     height = 600- margin.top - margin.bottom;
 
+    //Create the SVG and give it a nice drop shadow
     const svg = d3.select("#viz").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -223,7 +240,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", width)
         .attr("y", height+50 )
-        .text("Internet Users (Percent of the Population)")
+        .text(xAxisLabel)
         .attr("class", "axisLabels");
         
     // Add Y axis
@@ -238,7 +255,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", 0)
         .attr("y", -30 )
-        .text("Ammount of Cellphones (Per 100 People)")
+        .text(yAxisLabel)
         .attr("text-anchor", "start")
         .attr("class", "axisLabels");
 
@@ -270,13 +287,15 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .style("color", "white")
 
     //Tool tip fuctions to show and hide them on bubble rollover
+    // Ive modified the tool tip to be dynamic, Accepting and displaying information based on the currently selected x and y labels and years.
+    // It also displays the countries population size, which i have based the circle radius size from.
   var showTooltip = function(d) {
     tooltip
       .transition()
       .duration(200)
     tooltip
       .style("opacity", 1)
-      .html("Country: " + d['name'] + "<br>" + "Cellphones (Per 100 People): " + d['data'][yAxisDataKey][year] + "<br>" + "Internet Users (Of the Population): " + (+d['data'][xAxisDataKey][year]) + "% <br>" + "Population: " + d['data']['population_total'][year] )
+      .html("Country: " + d['name'] + "<br>" + xAxisLabel + ": " + d['data'][xAxisDataKey][year] + "<br>" + yAxisLabel + ": " + (+d['data'][yAxisDataKey][year]) + "<br>" + "Population: " + d['data']['population_total'][year] )
       .style("left", (d3.mouse(this)[0]+30) + "px")
       .style("top", (d3.mouse(this)[1]-30) + "px")
   }
@@ -307,5 +326,13 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .on("mousemove", moveTooltip )
     .on("mouseleave", hideTooltip );
 
-    $('#vizControls').show();
 };
+
+
+// This function shows the viz controls and hides all the CRUD Buttons. 
+function changeControls()
+{
+    $('#vizControls').show();
+    $('#axisSelects').show();
+    $('#showButton').hide();
+}

@@ -2,12 +2,33 @@
 <body>
     <main>
         <div class="container mainContent" >
+
             <div class="buttonGroup" style="display: none;" id="showButton">
                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#oneModal">Find One Country</button>
                 <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Add New Country</button>
                 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delModal">Delete Country</button>
-                <button type="button" class="btn btn-outline-primary" onclick="countryCircles('internet_users','cell_phones',1960)">Show Visualization</button>  
+                <button type="button" class="btn btn-outline-primary" onclick="countryCircles(); changeControls();">Show Visualization</button>  
             </div>
+            
+            <div class="buttonGroup" style="display: none;" id="axisSelects">
+            <div class="optionBoxes">
+              <label for="xAxisOption">X-Axis:</label>
+              <select class="form-control" id="xAxisOption">
+                <option selected value="cell_phones">Cell Phones (Per 100 People)</option>
+                <option value="internet_users">Internet Users (Percent of the Population)</option>
+                <option value="life_expectancy_years">Life Expectancy (Years)</option>
+              </select>
+            </div>
+
+            <div class="optionBoxes">
+              <label for="yAxisOption">Y-Axis:</label>
+              <select class="form-control" id="yAxisOption">
+                <option value="cell_phones">Cell Phones (Per 100 People)</option>
+                <option selected value="internet_users">Internet Users (Percent of the Population)</option>
+                <option value="life_expectancy_years">Life Expectancy (Years)</option>
+              </select>
+            </div>
+          </div>
 
             <p id="placeholder"></p>
             <img id="loader" src="{{url_for('static', filename='ajax-loader.gif')}}"/>
