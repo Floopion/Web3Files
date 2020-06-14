@@ -111,7 +111,7 @@ $( document ).ready(function() {
     */
 
     var xValue = "internet_users";
-    var yValue = "life_expectancy_years";
+    var yValue = "cell_phones";
     var timer;
 
     $("#play").on("click", function() {
@@ -211,7 +211,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
 
     // Add X axis
     var x = d3.scaleLinear()
-        .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][year]})])
+        .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][2017]})]) //Get the max of the last availible year as that will be the mas the graph gets too
         .range([ 0, width ]);
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -222,13 +222,12 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", width)
         .attr("y", height+50 )
-        .text("Internet Users (Hundred Thousand)")
+        .text("Internet Users (Percent of the Population)")
         .attr("class", "axisLabels");
         
-
     // Add Y axis
     var y = d3.scaleLinear()
-        .domain([0, d3.max(filteredData, function(d) { return +d['data'][yAxisDataKey][year]; })])
+        .domain([0, d3.max(filteredData, function(d) { return +d['data'][yAxisDataKey][2017]})])    //Get the max of the last availible year as that will be the mas the graph gets too
         .range([ height, 0]);
     svg.append("g")
         .call(d3.axisLeft(y));
@@ -238,7 +237,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
         .attr("text-anchor", "end")
         .attr("x", 0)
         .attr("y", -30 )
-        .text("Life Expectancy (Years)")
+        .text("Ammount of Cellphones (Per 100 People)")
         .attr("text-anchor", "start")
         .attr("class", "axisLabels");
 
@@ -276,7 +275,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
       .duration(200)
     tooltip
       .style("opacity", 1)
-      .html("Country: " + d['name'] + "<br>" + "Life Expectancy (Years): " + d['data'][yAxisDataKey][year] + "<br>" + "Internet Users (Hundred Thousand): " + d['data'][xAxisDataKey][year] + "<br>" + "Population: " + d['data']['population_total'][year] )
+      .html("Country: " + d['name'] + "<br>" + "Cellphones (Per 100 People): " + d['data'][yAxisDataKey][year] + "<br>" + "Internet Users (Of the Population): " + (+d['data'][xAxisDataKey][year]) + "% <br>" + "Population: " + d['data']['population_total'][year] )
       .style("left", (d3.mouse(this)[0]+30) + "px")
       .style("top", (d3.mouse(this)[1]-30) + "px")
   }
@@ -300,7 +299,7 @@ function countryCircles(xAxisDataKey,yAxisDataKey,year){
     .append("circle")
     .attr("fill",function(d,i){ return "#FFAC81" })
     .attr("class", function(d) { return "bubbles"})
-    .attr("cx", function (d) { return x(d['data'][xAxisDataKey][year]); } )
+    .attr("cx", function (d) { return x(+d['data'][xAxisDataKey][year]); } )
     .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
     .attr("r",  function (d) { return z(d['data']['population_total'][year]); } )
     .on("mouseover", showTooltip )
