@@ -50,12 +50,22 @@ blockquote{
 p{
     text-align: center;
 }
+
+.apiPanel{
+    background-color: #525252;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 30px 0;
+}
 #placeholder{
     color: $quaternaryColor;
     text-align: center;
     margin-top: 20px;
 }
 
+.error{
+    color: $quaternaryColor;
+}
 /*
     Stretch out the main bootstap container max width to allow the graph width to be wider that unsual
  */

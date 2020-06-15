@@ -129,7 +129,7 @@ def postCountries(count_name=None):
         else:    
             newCountry = Country(name=count_name, data={})
             newCountry.save();
-            return "CREATED", 201
+            return count_name +  " CREATED", 201
     except:
         return "INTERNAL SERVER ERROR", 500
 
