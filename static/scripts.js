@@ -329,7 +329,7 @@ function countryCircles(create,running){
         .data(filteredData)
         .enter()
         .append("circle")
-        .attr("fill",function(d,i){ return "#FEC3A6" })
+        .attr("fill",function(d,i){ return "#FF928B" })
         .attr("class", function(d) { return "bubbles"})
         .attr("cx", function (d) { return x(+d['data'][xAxisDataKey][year]); } )
         .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
