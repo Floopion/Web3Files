@@ -9,22 +9,18 @@ from flask_cors import CORS
 #  for local dev environment.                                   #
 #################################################################
 
-connect(
-     username='heroku_c1wldm92',
-     password='eomrqnfplp7782hecehq4ahchh',
-     host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
-     port=13626
-)
+# connect(
+#      username='heroku_c1wldm92',
+#      password='eomrqnfplp7782hecehq4ahchh',
+#      host='mongodb://heroku_c1wldm92:eomrqnfplp7782hecehq4ahchh@ds113626.mlab.com:13626/heroku_c1wldm92?retryWrites=false',
+#      port=13626
+# )
 
-# connect('devEnv')
+connect('devEnv')
 
 #####################################
 #   Create Tables in the database   #
 #####################################
-class User(Document):
-    email = StringField()
-    first_name = StringField()
-    last_name = StringField()
 
 class Country(Document):
     name = StringField()
@@ -125,13 +121,15 @@ def getCountries(count_id=None):
 ######################
 #   Country POST API #
 ######################
-@app.route('/countries', methods=['POST'])
-def postCountries():
+@app.route('/countries/<count_name>', methods=['POST'])
+def postCountries(count_name=None):
     try:
-        nName = request.form['cName']
-        nPopulation = request.form['cPop']
-        newCountry = Country(name=nName, population=nPopulation)
-        return "Created", 201
+        if count_name is None:
+            return "BAD REQUEST", 400
+        else:    
+            newCountry = Country(name=count_name, data={})
+            newCountry.save();
+            return "CREATED", 201
     except:
         return "INTERNAL SERVER ERROR", 500
 
@@ -139,13 +137,19 @@ def postCountries():
 #########################
 #   Country DELETE API  #
 #########################
-@app.route('/countries', methods=['DELETE'])
-def deleteCountry():
+@app.route('/countries/<count_id>', methods=['DELETE'])
+def deleteCountry(count_id=None):
 
     try:
-        country = request.form['name']
-        Country.objects(name=country).delete()
-        return "OK", 200
+        if count_id is None:
+            return "BAD REQUEST", 400
+        else:    
+            try:
+                country = count_id
+                Country.objects(id=country).delete()
+                return "OK", 200
+            except:
+                return "NOT FOUND", 404
     except:
         return "INTERNAL SERVER ERROR", 500
 

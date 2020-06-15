@@ -29,6 +29,16 @@ label {
     color: darkgray;
 }
 
+h2
+{
+    text-align: center;
+}
+
+code{
+    font-size: 70% !important;
+    color: $primaryColor !important;
+    word-break: break-word !important;
+}
 #placeholder{
     color: $quaternaryColor;
     text-align: center;
