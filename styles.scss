@@ -16,6 +16,8 @@ body{
 
 line{
     color: darkgray;
+    display: block;
+    z-index: 1;
 }
 label {
     display: inline-block;
@@ -241,6 +243,8 @@ label {
     stroke-width: 1px;
     stroke: black;
     opacity: .8;
+    display: block;
+    z-index: 2;
     &:hover{
         stroke:$primaryColor;
     }
@@ -258,6 +262,8 @@ label {
 .yearLabel{
     text-shadow: #000 0px 0px 35px;
     -webkit-font-smoothing: antialiased;
+    display: block;
+    z-index: 0;
 }
 
 #loader{

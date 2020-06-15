@@ -123,6 +123,7 @@ $( document ).ready(function() {
             $("#play").html("Play");
             running = false;
             clearInterval(timer);
+            countryCircles(false,false);
         } else {
             $("#play").html("Pause");
             sliderValue = $("#slider").val();
@@ -134,7 +135,7 @@ $( document ).ready(function() {
                 }
 
                 sliderValue++;
-                countryCircles(false);
+                countryCircles(false,true);
 
                 setTimeout(function() {
                     $("#slider").val(sliderValue);
@@ -157,14 +158,14 @@ $( document ).ready(function() {
     $(document).on('input', '#slider', function() {
         if (running == false){
             sliderValue = $("#slider").val();
-            countryCircles(false);
+            countryCircles(false,false);
         }
     });
 
 
     // On change listen event to run the draw function when an option box is changed
     $('#xAxisOption, #yAxisOption').change(function() {
-       countryCircles(false);
+       countryCircles(false,false);
     });
 
 });
@@ -178,7 +179,7 @@ $( document ).ready(function() {
  * 
  */
 
-function countryCircles(create){
+function countryCircles(create,running){
     
     // Get the Keys from the option box values
     let xAxisDataKey = $('#xAxisOption').val();
@@ -236,7 +237,18 @@ function countryCircles(create){
         on each axis.
     */
 
-    
+        // Add the year to the center of the svg  
+        svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width-650)
+        .attr("y", height-220)
+        .text(year)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#CDEAC0")
+        .attr("font-weight", "bolder")
+        .attr("font-size", "15rem")
+        .attr("class", "yearLabel");
+
     // Add X axis
     var x = d3.scaleLinear()
         .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][2017]})]) //Get the max of the last availible year as that will be the mas the graph gets too
@@ -245,7 +257,7 @@ function countryCircles(create){
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).ticks(8).tickSize(-height).tickSizeOuter(0));
 
-    // Add Y axis set the max on the axis to the max for the last year that we display, I have assumed in most cases all of the data increments so the max of our final year should be the max for the whole dataset.
+    //Draw X Axis
     svg.append("text")
         .attr("text-anchor", "end")
         .attr("x", width)
@@ -269,17 +281,6 @@ function countryCircles(create){
         .attr("text-anchor", "start")
         .attr("class", "axisLabels");
 
-    // Add the year to the center of the svg  
-    svg.append("text")
-    .attr("text-anchor", "middle")
-    .attr("x", width-650)
-    .attr("y", height-220)
-    .text(year)
-    .attr("text-anchor", "middle")
-    .attr("fill", "#CDEAC0")
-    .attr("font-weight", "bolder")
-    .attr("font-size", "15rem")
-    .attr("class", "yearLabel");;
 
       // Add a scale for bubble size
     var z = d3.scaleLinear()
@@ -328,7 +329,7 @@ function countryCircles(create){
         .data(filteredData)
         .enter()
         .append("circle")
-        .attr("fill",function(d,i){ return "#FF928B" })
+        .attr("fill",function(d,i){ return "#FEC3A6" })
         .attr("class", function(d) { return "bubbles"})
         .attr("cx", function (d) { return x(+d['data'][xAxisDataKey][year]); } )
         .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
@@ -337,6 +338,14 @@ function countryCircles(create){
         .on("mousemove", moveTooltip )
         .on("mouseleave", hideTooltip );
     }else{
+
+        // Ok..... I know this is some Hacky ass code, but it was a quick bugfix. Because of the way the transition works it means the the order that 
+        // Things are drawn is now "circle" "Year" "Gridlines" and obviously i cant just apply a z-index to drawn items. 
+        //T o fix this I call the whole function again and hive it draw itself
+        // in the right order after the tranition is done UNLESS the vis is running and the i just let the transitions 
+        //happen so this it visually runs smoother. 
+        // this would ideally be fixed in the future when i get time by refactoring this one "draw" function into 3 
+        // entierly seperate "Draw" "Run" & "Update" functions.
         d3.selectAll("circle")
         .data(filteredData)
         .transition()
@@ -345,9 +354,11 @@ function countryCircles(create){
         .attr("cy", function (d) { return y(d['data'][yAxisDataKey][year]); } )
         .attr("r",  function (d) { return z(d['data']['population_total'][year]); } );
         
-        setTimeout(function() {
-            countryCircles(true);
-        }, 900);
+        if(!running){
+            setTimeout(function() {
+                countryCircles(true);
+            }, 900);
+        }
         
     }
 
