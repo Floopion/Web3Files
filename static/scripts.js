@@ -99,6 +99,8 @@ $( document ).ready(function() {
         rawdata = JSON.parse(response);
         $("#loader").hide();
         $("#showButton").show();
+        countryCircles(true,false); 
+        changeControls();
     })
     .fail(function(xhr, status, error){
         $("#loader").hide();
