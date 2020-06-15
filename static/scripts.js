@@ -237,18 +237,6 @@ function countryCircles(create,running){
         on each axis.
     */
 
-        // Add the year to the center of the svg  
-        svg.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", width-650)
-        .attr("y", height-220)
-        .text(year)
-        .attr("text-anchor", "middle")
-        .attr("fill", "#CDEAC0")
-        .attr("font-weight", "bolder")
-        .attr("font-size", "15rem")
-        .attr("class", "yearLabel");
-
     // Add X axis
     var x = d3.scaleLinear()
         .domain([0, d3.max(filteredData, function(d) { return +d['data'][xAxisDataKey][2017]})]) //Get the max of the last availible year as that will be the mas the graph gets too
@@ -282,6 +270,19 @@ function countryCircles(create,running){
         .attr("class", "axisLabels");
 
 
+    // Add the year to the center of the svg  
+    svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", width-650)
+    .attr("y", height-220)
+    .text(year)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#CDEAC0")
+    .attr("font-weight", "bolder")
+    .attr("font-size", "15rem")
+    .attr("class", "yearLabel");
+
+    
       // Add a scale for bubble size
     var z = d3.scaleLinear()
     .domain([200000, 1310000000])
