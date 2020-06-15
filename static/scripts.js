@@ -282,7 +282,7 @@ function countryCircles(create,running){
     .attr("font-size", "15rem")
     .attr("class", "yearLabel");
 
-    
+
       // Add a scale for bubble size
     var z = d3.scaleLinear()
     .domain([200000, 1310000000])
@@ -373,3 +373,7 @@ function changeControls()
     $('#axisSelects').show();
     $('#showButton').hide();
 }
+
+function warning() {
+    alert("This may take a minute, please be patient.");
+  }

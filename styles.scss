@@ -29,15 +29,26 @@ label {
     color: darkgray;
 }
 
+em{
+    color: $secondaryColor;
+}
 h2
 {
     text-align: center;
 }
 
 code{
-    font-size: 70% !important;
-    color: $primaryColor !important;
-    word-break: break-word !important;
+    font-size: 70%;
+    color: $primaryColor;
+    word-break: break-word; 
+}
+
+blockquote{
+    padding-left: 50px!important;
+}
+
+p{
+    text-align: center;
 }
 #placeholder{
     color: $quaternaryColor;

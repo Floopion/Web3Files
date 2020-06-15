@@ -2,76 +2,76 @@
 <body>
     <main style="color: white;">
         <div class="container">
-            <h1 class="inspoHead">API Documentation</h1>
+            <h1 class="inspoHead" style="padding-top: 20px;padding-bottom: 20px">API Documentation</h1>
     
             <h2>Routes</h2>
             <p><em>GET /countries</em> - List all Countries
-            <br><em>GET /countries/&lt;optional:/count_id&gt;</em> - Get a Specific Country</p>
-            <br><em>POST /countries/&lt;count_name&t;</em> - Create a Specific Country</p>
+            <br><em>GET /countries/&lt;optional:/count_id&gt;</em> - Get a Specific Country
+            <br><em>POST /countries/&lt;count_name&gt;</em> - Create a Specific Country
             <br><em>DELETE /countries/&lt;count_id&gt;</em> - Delete a Specific Country</p>
-            <h3>Optional parameters</h3>
-            <p>count_id (string) Specific Country ID used to retrieve a single country</p>
-
+            <h2>Optional parameters</h2>
+            <p><em>&lt;count_id&gt;</em> (string) - Specific Country ID used to retrieve a single country
+            <br><em>&lt;count_name&gt;</em> (string) - Specific Country Name used to create a single with the specified name</p>
             <h2>Example Usages</h2>
             <p>
                 <h3>GET /countries</h3>
-                <em>Returns</em>
+                <em>Returns:</em>
                 <blockquote class="blockquote">
-                    <pre ><code>
-{"
-    _id":{"$oid":"5ee5d432b481a2626b4755e5"},
-    "name":"Afghanistan",
-    "data":{
-        "cell_phones":{
-            "1960":"0",
-            "1961" ... },
-        "internet_users":{
-            "1960":"",
-            "1961":"" ...},
-        "life_expectancy_years":{
-            "1800":"28.2",
-            "1801""27.9" ..},
-        "population_total":{"55":"0","55" ... }
-    },
-    _id":{"$oid":"5ee5d432b481a2626b4755e5"},
-    "name":"Albania",
-    "data":{
-        "cell_phones":{
-            "1960":"0",
-            "1961" ... },
-        "internet_users":{
-            "1960":"",
-            "1961":"" ...},
-        "life_expectancy_years":{
-            "1800":"28.2",
-            "1801""27.9" ..},
-        "population_total":{"55":"0","55" ... }
-    } ...
-}
-                     </code></pre>
+                <code>
+                    {"
+                        _id":{"$oid":"5ee5d432b481a2626b4755e5"},
+                        "name":"Afghanistan",
+                        "data":{
+                            "cell_phones":{
+                                "1960":"0",
+                                "1961" ... },
+                            "internet_users":{
+                                "1960":"",
+                                "1961":"" ...},
+                            "life_expectancy_years":{
+                                "1800":"28.2",
+                                "1801""27.9" ..},
+                            "population_total":{"55":"0","55" ... }
+                        },
+                        _id":{"$oid":"5ee5d432b481a2626b4755e5"},
+                        "name":"Albania",
+                        "data":{
+                            "cell_phones":{
+                                "1960":"0",
+                                "1961" ... },
+                            "internet_users":{
+                                "1960":"",
+                                "1961":"" ...},
+                            "life_expectancy_years":{
+                                "1800":"28.2",
+                                "1801""27.9" ..},
+                            "population_total":{"55":"0","55" ... }
+                        } ...
+                    }
+                     </code>
             </blockquote>
 
-            <h3>GET /countries/5ee5d432b481a2626b4755e5</h3>
-            <em>Returns</em>
+            <h3>GET /countries/<em>5ee5d432b481a2626b4755e5</em></h3>
+            <em>Returns:</em>
             <blockquote class="blockquote">
-               <pre><code>
-{"
-    _id":{"$oid":"5ee5d432b481a2626b4755e5"},
-    "name":"Afghanistan",
-    "data":{
-        "cell_phones":{
-            "1960":"0",
-            "1961" ... },
-        "internet_users":{
-            "1960":"",
-            "1961":"" ...},
-        "life_expectancy_years":{
-            "1800":"28.2",
-            "1801""27.9" ..},
-        "population_total":{"55":"0","55" ... }
-    }
-}
-                </code></pre>
+               <code>
+                    {"
+                        _id":{"$oid":"5ee5d432b481a2626b4755e5"},
+                        "name":"Afghanistan",
+                        "data":{
+                            "cell_phones":{
+                                "1960":"0",
+                                "1961" ... },
+                            "internet_users":{
+                                "1960":"",
+                                "1961":"" ...},
+                            "life_expectancy_years":{
+                                "1800":"28.2",
+                                "1801""27.9" ..},
+                            "population_total":{"55":"0","55" ... }
+                        }
+                    }
+                </code>
                 </blockquote>
             </p>
     </main>
