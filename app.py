@@ -126,7 +126,9 @@ def postCountries(count_name=None):
     try:
         if count_name is None:
             return "BAD REQUEST", 400
-        else:    
+        else:  
+            count_name = count_name.replace("_", " ") 
+            print(count_name) 
             newCountry = Country(name=count_name, data={})
             newCountry.save();
             return count_name +  " CREATED", 201
