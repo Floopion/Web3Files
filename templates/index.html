@@ -3,13 +3,6 @@
     <main>
         <div class="container mainContent" >
 
-            <div class="buttonGroup" style="display: none;" id="showButton">
-                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#oneModal">Find One Country</button>
-                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal">Add New Country</button>
-                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delModal">Delete Country</button>
-                <button type="button" class="btn btn-outline-primary" onclick="countryCircles(true,false); changeControls();">Show Visualization</button>  
-            </div>
-            
             <div class="buttonGroup" style="display: none;" id="axisSelects">
               <div class="optionBoxes">
                 <label for="yAxisOption">Y-Axis:</label>
@@ -28,7 +21,7 @@
                   <option value="life_expectancy_years">Life Expectancy (Years)</option>
                 </select>
               </div>
-          </div>
+            </div>
 
             <p id="placeholder"></p>
             <img id="loader" src="{{url_for('static', filename='ajax-loader.gif')}}"/>
@@ -37,76 +30,6 @@
             <div class="vizControls" id="vizControls" style="display: none;">
               <button name="play" class="btn btn-outline-warning" id="play">Play</button>
               <input type="range" id="slider" name="slider" min="1960" max="2016" value="1960" class="slider">
-            </div>
-
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Add Country</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <form id="cForm">
-                      <div class="modal-body">
-                          <div class="form-group">
-                            <label for="cName">Country Name</label>
-                            <input type="text" class="form-control" id="cName" placeholder="Country Name" required>
-                          </div>
-                      </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="submit" type="submit" value="submit" class="btn btn-success" data-dismiss="modal" onclick="getFormData()">Submit</button>
-                        </div>
-                    </form>
-                  </div>
-                </div>
-            </div>
-
-
-            <div class="modal fade" id="delModal" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Delete Country</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <form id="cForm">
-                      <div class="modal-body">
-                          <div class="form-group">
-                            <label for="cDel">Country Name</label>
-                            <input type="text" class="form-control" id="cDel" placeholder="Country Name" required>
-                          </div>
-                      </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="submit" type="submit" value="submit" class="btn btn-danger" data-dismiss="modal" onclick="deleteCountry()">Delete</button>
-                        </div>
-                    </form>
-                  </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="oneModal" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Find a Country</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <form id="cForm">
-                      <div class="modal-body">
-                          <div class="form-group">
-                            <label for="cFind">Find Country</label>
-                            <input type="text" class="form-control" id="cFind" placeholder="Enter Country ID" required>
-                          </div>
-                      </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="submit" type="submit" value="submit" class="btn btn-info" data-dismiss="modal" onclick="findCountry()">Find</button>
-                        </div>
-                    </form>
-                  </div>
-                </div>
             </div>
 
         </div>

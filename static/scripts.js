@@ -3,85 +3,11 @@
 #   Adding Countries and Deleting Countries           #
 #####################################################*/
 
+    //  Globals
+    //Raw data is here so that i can load the data into it on initial page load, this saves me calling my API ever time The data on my SVG changes, or i want to re filter the data etc.
     var rawdata ={};
     var running = false;
     var svg = null;
-
-/*##############################
-#       GET Requests           #
-###############################*/
-
-function findCountry() {
-
-    $.get("/countries/" + $('#cFind').val())
-    .done(function(response){
-        $('#placeholder').text(response);
-    })
-    .fail(function(xhr, status, error){
-        if (error == "NOT FOUND") {
-            $('#placeholder').text(error + " Please enter a valid country ID!");
-        }else {
-            $('#placeholder').text(error + " Please try again later.");
-        }
-    });
-};
-
-/*##############################
-#       POST Requests          #
-###############################*/
-function getFormData() {
-
-    let country = {};
-    let name = false;
-
-    if ($('#cName').val().length != 0  ) {
-        country["cName"] = $('#cName').val();
-        name = true;
-    } else {
-        alert("Please Enter a Country name");
-    }
-
-    if ($('#cPop').val().length != 0) {
-        country["cName"] = $('#cName').val();
-        console.log(country);
-        pop = true;
-    } else {
-        alert("Please Enter a valid population number");
-    }
-    country["cName"] = $('#cName').val();
-    country["cPop"] = $('#cPop').val();
-    console.log(country);
-
-    if (name) {
-
-        $.post(("/countries"), country, function (data) {
-            console.log(data);
-        });
-
-        $(':input', '#cForm')
-            .not(':button, :submit, :reset, :hidden')
-            .val('')
-            .prop('checked', false)
-            .prop('selected', false);
-    }
-};
-
-
-/*##############################
-#       DELETE Requests        #
-###############################*/
-function deleteCountry() {
-    let toDelete = $('#cDel').val().toString();
-    let country = {};
-    country['name'] = toDelete;
-
-     $.ajax({
-          type: 'DELETE',
-          url: "/countries",
-          data: country,
-        });
-};
-
 
 /*################
 #       D3       #
@@ -98,9 +24,9 @@ $( document ).ready(function() {
     .done(function(response){
         rawdata = JSON.parse(response);
         $("#loader").hide();
-        $("#showButton").show();
+        $('#vizControls').show();
+        $('#axisSelects').show();
         countryCircles(true,false); 
-        changeControls();
     })
     .fail(function(xhr, status, error){
         $("#loader").hide();
@@ -344,11 +270,12 @@ function countryCircles(create,running){
 
         // Ok..... I know this is some Hacky ass code, but it was a quick bugfix. Because of the way the transition works it means the the order that 
         // Things are drawn is now "circle" "Year" "Gridlines" and obviously i cant just apply a z-index to drawn items. 
-        //T o fix this I call the whole function again and hive it draw itself
-        // in the right order after the tranition is done UNLESS the vis is running and the i just let the transitions 
-        //happen so this it visually runs smoother. 
-        // this would ideally be fixed in the future when i get time by refactoring this one "draw" function into 3 
-        // entierly seperate "Draw" "Run" & "Update" functions.
+        // To fix this I call the whole function again and hive it draw itself
+        // in the right order after the tranition is done UNLESS the viz is running and then I just let the transitions 
+        // happen so this it visually runs smoother. 
+        // This would ideally be fixed in the future when I get time by refactoring this one "draw" function into 3 
+        // entierly seperate "Draw" "Run" & "Update" functions and applying d3`s .raise() funtion to the bubbles where I need. I cant apply .Raise()
+        // at the moment as I think my parent child relationships are a little whack.  
         d3.selectAll("circle")
         .data(filteredData)
         .transition()
@@ -366,15 +293,6 @@ function countryCircles(create,running){
     }
 
 };
-
-
-// This function shows the viz controls and hides all the CRUD Buttons. 
-function changeControls()
-{
-    $('#vizControls').show();
-    $('#axisSelects').show();
-    $('#showButton').hide();
-}
 
 function warning() {
     alert("This may take a minute, please be patient.");
