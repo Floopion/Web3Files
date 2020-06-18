@@ -133,6 +133,7 @@ def postCountries(count_name=None):
         if count_name is None:
             return "BAD REQUEST", 400
         #if it is, Stip the _ out of the string so that our names and replace them with spaces, Then save the new country to the database with an empty dictionary ready to be filled
+        else:
             count_name = count_name.replace("_", " ") 
             newCountry = Country(name=count_name, data={})
             newCountry.save();
